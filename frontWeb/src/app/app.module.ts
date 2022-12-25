@@ -6,14 +6,16 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatToolbarModule} from '@angular/material/toolbar'; 
-import {MatIconModule} from '@angular/material/icon'; 
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 
+import { FooterComponent } from './components/body/footer/footer.component';
+import { BodyComponent } from './components/body/body.component';
+import { MenuComponent } from './components/menu/menu.component';
 
 
-import { FooterComponent } from './src/components/footer/footer.component'; 
 
 
 
@@ -23,7 +25,11 @@ import { FooterComponent } from './src/components/footer/footer.component';
   declarations: [
     AppComponent,
     FooterComponent,
- 
+    BodyComponent,
+    MenuComponent,
+
+
+
 
 
   ],
@@ -42,7 +48,7 @@ import { FooterComponent } from './src/components/footer/footer.component';
     MatButtonModule,
     MatCardModule,
 
-    
+
   ],
   providers: [],
   bootstrap: [AppComponent]

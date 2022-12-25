@@ -1,0 +1,14 @@
+<div class="menu-content">
+<mat-card class="menu-card" *ngFor="let item of listaMenu">
+  <div (click)="acessarRota(item.rota)">
+  <mat-card-header>
+    <img mat-card-avatar class="header-image" [src]="item.imagem" alt="Photo of a Shiba Inu">
+    <mat-card-title>{{item.titulo}}</mat-card-title>
+    <mat-card-subtitle class="menu-subtitle">{{item.descricao}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content class="footer-card-menu">
+  </mat-card-content>
+</div>
+</mat-card>
+
+</div>

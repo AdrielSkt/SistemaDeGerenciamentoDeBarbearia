@@ -1,0 +1,32 @@
+.menu-content{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.menu-card {
+  max-width: 400px;
+  margin-top: 15%;
+  margin-left: 2%;
+  border-radius: 15px;
+  background-color: rgb(224, 216, 216);
+
+
+}
+
+.header-image {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  background-size: cover;
+}
+
+.menu-subtitle{
+  margin-top: 12%;
+}
+
+
+.footer-card-menu{
+  margin-top: 15%;
+}

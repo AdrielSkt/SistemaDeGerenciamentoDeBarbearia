@@ -1,0 +1,23 @@
+.container {
+  height:90%;
+  background-color: black;
+}
+
+.example-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidenav {
+  padding: 20px;
+  background-color: rgb(63,81,181);
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+.menu-list{
+  margin-top: 5%;
+}
