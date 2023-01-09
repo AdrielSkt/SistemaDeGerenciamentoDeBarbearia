@@ -1,5 +1,6 @@
 <div class="menu-content">
 <mat-card class="menu-card" *ngFor="let item of listaMenu">
+  <!-- <div (click)="acessarRota(item.rota)" *ngIf="item.titulo == 'Gerenciamento de Horarios'"> -->
   <div (click)="acessarRota(item.rota)">
   <mat-card-header>
     <img mat-card-avatar class="header-image" [src]="item.imagem" alt="Photo of a Shiba Inu">

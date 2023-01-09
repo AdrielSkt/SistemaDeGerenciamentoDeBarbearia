@@ -26,7 +26,7 @@ ngOnInit() {
     },
     {
       nome: 'Gerenciamento de usuarios',
-      rota: 'usuario/read',
+      rota: '/usuario/read',
       icone: 'people_alt'
     },
     {
@@ -51,8 +51,6 @@ public verificaRota(): void{
         this.rotaAtual = 'Menu';
       }else{
         this.rotas.forEach((rota)=> {
-          console.log(rota.rota);
-          console.log(e.url);
           if(rota.rota == e.url){
             this.rotaAtual = rota.nome;
 

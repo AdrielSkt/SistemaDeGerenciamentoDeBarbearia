@@ -10,6 +10,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
+import {MatTableModule} from '@angular/material/table';
 
 import { FooterComponent } from './components/body/footer/footer.component';
 import { BodyComponent } from './components/body/body.component';
@@ -41,12 +42,12 @@ import { MenuComponent } from './components/menu/menu.component';
     MatSidenavModule,
     MatToolbarModule,
     MatIconModule,
-    MatIconModule,
     MatSidenavModule,
     MatSlideToggleModule,
     MatToolbarModule,
     MatButtonModule,
     MatCardModule,
+    MatTableModule,
 
 
   ],
