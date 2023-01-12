@@ -7,6 +7,9 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { UsuarioEditComponent } from './usuario-edit/usuario-edit.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+
 
 
 
@@ -22,7 +25,9 @@ import { UsuarioEditComponent } from './usuario-edit/usuario-edit.component';
     MatTableModule,
     MatIconModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule
   ]
 })
 export class UsuarioModule { }

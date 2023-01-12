@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Usuario } from '../usuario-model/usuario-model';
+import { ListagemUsuarios } from '../usuario-model/usuarios-listagem-model';
 
 
 @Component({
@@ -9,10 +10,10 @@ import { Usuario } from '../usuario-model/usuario-model';
   styleUrls: ['./usuarios-read.component.scss']
 })
 export class UsuariosReadComponent {
-public usuarios: Usuario[] = [
-  {id: 1, nome: 'Adriel', email: 'adr@mail.com', imagem: undefined, senha: 'dasdasda',servicos: [{id: 1,nome: 'asd', valor: 2311, imagem: undefined }],sobre: 'menoooooooo'},
-  {id: 2, nome: 'Caio', email: 'adr@mail.com', imagem: undefined, senha: 'dasdasda',servicos: [{id: 1,nome: 'asd', valor: 2311, imagem: undefined }],sobre: 'menoooooooo'},
-  {id: 3, nome: 'Igor', email: 'adr@mail.com', imagem: undefined, senha: 'dasdasda',servicos: [{id: 1,nome: 'asd', valor: 2311, imagem: undefined }],sobre: 'menoooooooo'}
+public usuarios: ListagemUsuarios[] = [
+  {id: 1, nome: 'Adriel',imagem: undefined},
+  {id: 2, nome: 'Caio',imagem: undefined},
+  {id: 3, nome: 'Igor',imagem: undefined}
 ]
 
 
@@ -23,5 +24,8 @@ constructor(private router: Router){}
 ngOnInit(){
 }
 
-// this.router.navigate(['usuario/edit'])
+public editarUsuario(id: Number){
+  this.router.navigate(['usuario/edit', id])
+}
+
 }
