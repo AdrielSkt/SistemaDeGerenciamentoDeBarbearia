@@ -15,7 +15,7 @@ import {MatTableModule} from '@angular/material/table';
 import { FooterComponent } from './components/body/footer/footer.component';
 import { BodyComponent } from './components/body/body.component';
 import { MenuComponent } from './components/menu/menu.component';
-
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -27,7 +27,7 @@ import { MenuComponent } from './components/menu/menu.component';
     AppComponent,
     FooterComponent,
     BodyComponent,
-    MenuComponent,
+    MenuComponent
 
 
 
@@ -48,6 +48,7 @@ import { MenuComponent } from './components/menu/menu.component';
     MatButtonModule,
     MatCardModule,
     MatTableModule,
+    FormsModule,
 
 
   ],

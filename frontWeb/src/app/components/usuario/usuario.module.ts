@@ -9,8 +9,8 @@ import {MatCardModule} from '@angular/material/card';
 import { UsuarioEditComponent } from './usuario-edit/usuario-edit.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-
-
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -27,7 +27,9 @@ import {MatInputModule} from '@angular/material/input';
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatSlideToggleModule,
+    FormsModule
   ]
 })
 export class UsuarioModule { }

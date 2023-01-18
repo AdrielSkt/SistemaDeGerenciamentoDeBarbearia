@@ -1,6 +1,11 @@
+div{
+  display: flex;
+}
 
 p{
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .formulario{
@@ -9,8 +14,22 @@ p{
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: aliceblue;
+    background-color: rgb(0, 0, 0);
     max-width: 400px;
 
 }
 
+
+#texto input,mat-label, mat-icon {
+color: rgb(0, 0, 0);
+}
+
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.servicos{
+  color: aliceblue;
+}

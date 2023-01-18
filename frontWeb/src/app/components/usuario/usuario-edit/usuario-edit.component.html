@@ -1,13 +1,37 @@
 <div >
 <mat-card class="formulario">
-    <p>
-        <mat-form-field appearance="outline">
+    <p id="texto">
+        <mat-form-field appearance="fill">
           <mat-label>Nome</mat-label>
-          <input matInput placeholder="Placeholder">
-          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-          <mat-hint>Hint</mat-hint>
+          <input matInput placeholder="Escreva seu nome">
+          <mat-icon matSuffix>view_timeline</mat-icon>
         </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>E-mail</mat-label>
+          <input matInput placeholder="Escreva seu e-mail">
+          <mat-icon matSuffix>markunread</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field  appearance="fill">
+          <mat-label>Senha </mat-label>
+          <input  matInput [type]="hide ? 'password' : 'text'" placeholder="Escreva sua senha">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+
+      <mat-form-field appearance="fill" *ngIf="isChecked">
+        <mat-label>Sobre</mat-label>
+        <textarea matInput></textarea>
+      </mat-form-field>
       </p>
+
+      
     
 </mat-card>
+<mat-card class="formulario" *ngFor="">
+  <mat-slide-toggle class="servicos" [(ngModel)]="isChecked">Slide Toggle Checked: {{isChecked}}</mat-slide-toggle>
+</mat-card>
+
 </div>
