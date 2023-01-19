@@ -1,4 +1,4 @@
-<div >
+<div class="content" >
 <mat-card class="formulario">
     <p id="texto">
         <mat-form-field appearance="fill">
@@ -30,8 +30,10 @@
       
     
 </mat-card>
-<mat-card class="formulario" *ngFor="">
-  <mat-slide-toggle class="servicos" [(ngModel)]="isChecked">Slide Toggle Checked: {{isChecked}}</mat-slide-toggle>
+<mat-card class="listaServicos">
+  <p class="servico" *ngFor="let servico of servicos">
+  <mat-slide-toggle  [(ngModel)]="isChecked"></mat-slide-toggle>{{servico.nome}}
+  </p>
 </mat-card>
 
 </div>
