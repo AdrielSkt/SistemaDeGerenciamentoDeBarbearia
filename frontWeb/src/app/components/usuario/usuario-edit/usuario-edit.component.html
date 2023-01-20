@@ -1,5 +1,9 @@
 <div class="content" >
-<mat-card class="formulario">
+
+    <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon" routerLink="/usuario/read">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+  <mat-card class="formulario">
     <p id="texto">
         <mat-form-field appearance="fill">
           <mat-label>Nome</mat-label>
@@ -21,7 +25,7 @@
           </button>
         </mat-form-field>
 
-      <mat-form-field appearance="fill" *ngIf="isChecked">
+      <mat-form-field appearance="fill">
         <mat-label>Sobre</mat-label>
         <textarea matInput></textarea>
       </mat-form-field>
@@ -31,9 +35,10 @@
     
 </mat-card>
 <mat-card class="listaServicos">
+  <h1 style="margin-bottom: inherit;">SERVIÇOS</h1>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   <p class="servico" *ngFor="let servico of servicos">
-  <mat-slide-toggle  [(ngModel)]="isChecked"></mat-slide-toggle>{{servico.nome}}
+  <mat-slide-toggle color="primary" (change)="toggle($event); atualizaLista(servico)"></mat-slide-toggle>{{servico.nome}}
   </p>
 </mat-card>
-
 </div>

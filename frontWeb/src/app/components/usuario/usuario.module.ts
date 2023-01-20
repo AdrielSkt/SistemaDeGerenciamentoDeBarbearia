@@ -11,7 +11,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { FormsModule } from '@angular/forms';
-
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,9 @@ import { FormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatInputModule,
     MatSlideToggleModule,
-    FormsModule
+    FormsModule,
+    MatProgressBarModule,
+    RouterModule
   ]
 })
 export class UsuarioModule { }

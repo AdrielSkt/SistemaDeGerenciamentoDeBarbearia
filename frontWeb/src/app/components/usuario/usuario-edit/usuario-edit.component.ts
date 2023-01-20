@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { ActivatedRoute } from '@angular/router';
 import { Servico } from '../usuario-model/servicos-model';
 import { Usuario } from '../usuario-model/usuario-model';
@@ -12,7 +13,8 @@ import { Usuario } from '../usuario-model/usuario-model';
 export class UsuarioEditComponent {
   idDeEdicao!: number;
   hide = true;
-  isChecked: boolean = true;
+  isChecked: boolean = false;
+  public servicosUsuario: Servico[] = [];
   public servicos: Servico[] = [
     {id: 1, nome: "Corte de Cabelo", valor: 30},
     {id: 1, nome: "Corte de Barba", valor: 30},
@@ -28,7 +30,28 @@ export class UsuarioEditComponent {
     console.log(this.idDeEdicao);
 
   }
+
   
+async uncheck(){
+  this.isChecked = !this.isChecked;
+
+}
+
+  atualizaLista(servico: Servico):void{
+    if(this.isChecked == true){
+     this.servicosUsuario.push(servico);
+    }
+    if(this.isChecked ==false){
+      this.servicosUsuario = this.servicosUsuario.filter(e => e != servico);
+    }
+    console.log(this.servicosUsuario)
+    return;
+  }
+
+  public toggle(event: MatSlideToggleChange): void{
+    this.isChecked = event.checked;
+  }
+
 }
 
 
