@@ -1,8 +1,13 @@
+<div class="title-div">
+  <button mat-mini-fab color="primary" routerLink="/usuario/read">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  Editar Usuario
+</div>
+
 <div class="content" >
 
-    <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon" routerLink="/usuario/read">
-      <mat-icon>arrow_back</mat-icon>
-    </button>
+
   <mat-card class="formulario">
     <p id="texto">
         <mat-form-field appearance="fill">
@@ -41,4 +46,10 @@
   <mat-slide-toggle color="primary" (change)="toggle($event); atualizaLista(servico)"></mat-slide-toggle>{{servico.nome}}
   </p>
 </mat-card>
+</div>
+
+<div class="save-button">
+  <button class="addButton" mat-raised-button color="primary" (click)="salvar()" routerLink="/usuario/read">
+    <mat-icon>save</mat-icon> Salvar
+  </button>
 </div>

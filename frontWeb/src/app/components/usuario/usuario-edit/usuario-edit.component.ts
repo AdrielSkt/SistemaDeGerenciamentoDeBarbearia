@@ -17,8 +17,9 @@ export class UsuarioEditComponent {
   public servicosUsuario: Servico[] = [];
   public servicos: Servico[] = [
     {id: 1, nome: "Corte de Cabelo", valor: 30},
-    {id: 1, nome: "Corte de Barba", valor: 30},
-    {id: 1, nome: "Sombrancelha", valor: 10},
+    {id: 2, nome: "Corte de Barba", valor: 30},
+    {id: 3, nome: "Sombrancelha", valor: 10},
+    {id: 4, nome: "Progressiva", valor: 60},
   ]
 
   constructor(private rotaDeParametro: ActivatedRoute){
@@ -32,10 +33,7 @@ export class UsuarioEditComponent {
   }
 
   
-async uncheck(){
-  this.isChecked = !this.isChecked;
 
-}
 
   atualizaLista(servico: Servico):void{
     if(this.isChecked == true){
@@ -51,6 +49,8 @@ async uncheck(){
   public toggle(event: MatSlideToggleChange): void{
     this.isChecked = event.checked;
   }
+
+  public salvar(): void{}
 
 }
 

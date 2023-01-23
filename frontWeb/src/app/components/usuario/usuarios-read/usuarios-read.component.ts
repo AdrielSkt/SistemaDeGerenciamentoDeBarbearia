@@ -28,4 +28,8 @@ public editarUsuario(id: Number){
   this.router.navigate(['usuario/edit', id])
 }
 
+public adicionarUsuario(){
+  this.router.navigate(['usuario/create'])
+}
+
 }
