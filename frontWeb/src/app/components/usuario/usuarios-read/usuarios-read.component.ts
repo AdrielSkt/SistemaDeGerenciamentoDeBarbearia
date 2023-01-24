@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Usuario } from '../usuario-model/usuario-model';
-import { ListagemUsuarios } from '../usuario-model/usuarios-listagem-model';
+import { ListagemUsuarios } from '../../../models/usuarios-listagem-model';
 
 
 @Component({

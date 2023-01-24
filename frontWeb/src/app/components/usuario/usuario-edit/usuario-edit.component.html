@@ -5,26 +5,26 @@
   Editar Usuario
 </div>
 
-<div class="content" >
+<form class="content" [formGroup]="formulario">
 
 
   <mat-card class="formulario">
     <p id="texto">
         <mat-form-field appearance="fill">
           <mat-label>Nome</mat-label>
-          <input matInput placeholder="Escreva seu nome">
+          <input matInput placeholder="Escreva seu nome" formControlName="nome">
           <mat-icon matSuffix>view_timeline</mat-icon>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
           <mat-label>E-mail</mat-label>
-          <input matInput placeholder="Escreva seu e-mail">
+          <input matInput placeholder="Escreva seu e-mail" formControlName="email">
           <mat-icon matSuffix>markunread</mat-icon>
         </mat-form-field>
 
         <mat-form-field  appearance="fill">
           <mat-label>Senha </mat-label>
-          <input  matInput [type]="hide ? 'password' : 'text'" placeholder="Escreva sua senha">
+          <input  matInput [type]="hide ? 'password' : 'text'" placeholder="Escreva sua senha" formControlName="senha">
           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
@@ -32,7 +32,7 @@
 
       <mat-form-field appearance="fill">
         <mat-label>Sobre</mat-label>
-        <textarea matInput></textarea>
+        <textarea matInput formControlName="sobre"></textarea>
       </mat-form-field>
       </p>
 
@@ -43,10 +43,10 @@
   <h1 style="margin-bottom: inherit;">SERVIÇOS</h1>
   <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   <p class="servico" *ngFor="let servico of servicos">
-  <mat-slide-toggle color="primary" (change)="toggle($event); atualizaLista(servico)"></mat-slide-toggle>{{servico.nome}}
+  <mat-slide-toggle color="primary" [checked]="validaToggleUsuarioEdit(servico.id)" (change)="atualizaListaServicos(servico, $event)" ></mat-slide-toggle>{{servico.nome}}
   </p>
 </mat-card>
-</div>
+</form>
 
 <div class="save-button">
   <button class="addButton" mat-raised-button color="primary" (click)="salvar()" routerLink="/usuario/read">
