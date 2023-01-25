@@ -17,7 +17,7 @@ export class UsuarioEditComponent implements OnInit {
   public isChecked: boolean = false;
   public formulario!: FormGroup;
   public usuarioEdit!: Usuario;
-  public servicosUsuario: Servico[] = [];
+  public servicosUsuario: Number[] = [];
 
 
   public servicos: Servico[] = [
@@ -73,6 +73,8 @@ export class UsuarioEditComponent implements OnInit {
     }
   }
 
+
+
   preecheFormulario(): void {
     this.formulario.get('id')!.setValue(this.usuarioEdit.id);
     this.formulario.get('nome')!.setValue(this.usuarioEdit.nome);
@@ -80,13 +82,12 @@ export class UsuarioEditComponent implements OnInit {
     this.formulario.get('imagem')!.setValue(this.usuarioEdit.imagem);
     this.formulario.get('senha')!.setValue(this.usuarioEdit.senha);
     this.formulario.get('sobre')!.setValue(this.usuarioEdit.sobre);
-    // let obj = this.formulario.getRawValue()
-    // console.log(JSON.stringify(obj));
+
 
     this.servicos.forEach(e => {
       this.usuarioEdit.servicos.forEach(id => {
         if (e.id == id) {
-          this.servicosUsuario.push(e);
+          this.servicosUsuario.push(e.id);
         }
       }
       )
@@ -94,8 +95,9 @@ export class UsuarioEditComponent implements OnInit {
 
   }
 
+
+
   validaToggleUsuarioEdit(id: Number): boolean {
-    console.log(id);
     let validacao: boolean = false;
     if (this.idDeEdicao != undefined) {
       for (const key in this.usuarioEdit.servicos) {
@@ -114,18 +116,20 @@ export class UsuarioEditComponent implements OnInit {
   atualizaListaServicos(servico: Servico, event: MatSlideToggleChange): void {
     this.isChecked = event.checked;
     if (this.isChecked == true) {
-      this.servicosUsuario.push(servico);
+      this.servicosUsuario.push(servico.id);
     }
     if (this.isChecked == false) {
-      this.servicosUsuario = this.servicosUsuario.filter(e => e != servico);
+      this.servicosUsuario = this.servicosUsuario.filter(e => e != servico.id);
     }
     console.log(this.servicosUsuario);
   }
 
 
   public salvar(): void { 
-    
-    console.log(this.servicosUsuario); }
+    this.formulario.get('servicos')!.setValue(this.servicosUsuario)
+    let obj = this.formulario.getRawValue()
+    console.log(JSON.stringify(obj));
+}
 
 }
 

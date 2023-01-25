@@ -21,6 +21,7 @@ dataSource = this.usuarios;
 
 constructor(private router: Router){}
 ngOnInit(){
+  //chamada do metodo de listagem de usuario
 }
 
 public editarUsuario(id: Number){
@@ -29,6 +30,12 @@ public editarUsuario(id: Number){
 
 public adicionarUsuario(){
   this.router.navigate(['usuario/create'])
+}
+
+public excluirUsuario(id: Number){
+  //Chamada para excluir usuario
+  //Chamada de listagem de usuario para atualizar lista exibida
+
 }
 
 }
