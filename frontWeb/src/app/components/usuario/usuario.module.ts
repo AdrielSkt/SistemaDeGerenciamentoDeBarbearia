@@ -34,7 +34,8 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     MatProgressBarModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
   ]
 })
 export class UsuarioModule { }

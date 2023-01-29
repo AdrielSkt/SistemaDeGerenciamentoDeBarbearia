@@ -20,8 +20,8 @@ ngOnInit() {
       icone: 'home'
     },
     {
-      nome:'Gerenciamento de serviços',
-      rota: '',
+      nome:'Gerenciamento de horarios',
+      rota: 'gerenciar-marcacoes',
       icone: 'watch_later'
     },
     {

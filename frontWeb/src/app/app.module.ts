@@ -11,15 +11,16 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
-
 import { FooterComponent } from './components/body/footer/footer.component';
 import { BodyComponent } from './components/body/body.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { FormsModule } from '@angular/forms';
-
-
-
-
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { GerenciamentoDeHorariosComponent } from './components/gerenciamento-de-horarios/gerenciamento-de-horarios.component';
 
 
 @NgModule({
@@ -27,7 +28,9 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     FooterComponent,
     BodyComponent,
-    MenuComponent
+    MenuComponent,
+    GerenciamentoDeHorariosComponent
+
 
 
 
@@ -49,6 +52,12 @@ import { FormsModule } from '@angular/forms';
     MatCardModule,
     MatTableModule,
     FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatProgressBarModule,
+    MatDatepickerModule
+
 
 
   ],

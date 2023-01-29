@@ -20,7 +20,7 @@ ngOnInit() {
       imagem: "assets/horario.png",
       titulo: "Gerenciamento de Horarios",
       descricao: 'Gerencie as solicitações e os horarios marcados',
-      rota: ''
+      rota: 'gerenciar-marcacoes'
 
     },
     {
