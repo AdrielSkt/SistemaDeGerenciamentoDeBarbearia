@@ -7,4 +7,6 @@ export interface FormularioMarcacao {
   data: Number;
   hora: String;
   servicos: Servico[];
+  // Pendente: Aprovado
+  situacao: String;
 }

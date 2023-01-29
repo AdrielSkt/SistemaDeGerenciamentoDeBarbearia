@@ -21,7 +21,7 @@ ngOnInit() {
     },
     {
       nome:'Gerenciamento de horarios',
-      rota: 'gerenciar-marcacoes',
+      rota: '/gerenciar-marcacoes',
       icone: 'watch_later'
     },
     {

@@ -2,13 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-
-import * as _moment from 'moment';
 import {default as _rollupMoment} from 'moment';
 import { FormularioMarcacao } from 'src/app/models/formulario-marcacao-model';
 import { Servico } from 'src/app/models/servicos-model';
 
-const moment = _rollupMoment || _moment;
+
 export const MY_FORMATS = {
   parse: {
     dateInput: 'DD/MM/YYYY',
@@ -37,7 +35,7 @@ export const MY_FORMATS = {
 })
 export class GerenciamentoDeHorariosComponent implements OnInit{
   startDate = new Date();
-  diasSemana: String[] = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado', 'Domingo'];
+  diasSemana: String[] = ['Domingo','Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
   diaAtual?: String;
 
 
@@ -48,14 +46,21 @@ export class GerenciamentoDeHorariosComponent implements OnInit{
     { id: 4, nome: "Progressiva", valor: 60 },
   ]
   public marcacoes: FormularioMarcacao[] = [
-    {id: 1, idBarbeiro: 2, nomeCliente: 'Adriel',data: Date.now(),hora: "11",servicos: [this.servicos[1]]},
+    {id: 1, idBarbeiro: 2, nomeCliente: 'Adriel',data: Date.now(),hora: "11",servicos: [this.servicos[2], this.servicos[3]], situacao: "Aprovado"},
+    {id: 1, idBarbeiro: 2, nomeCliente: 'Adriel',data: Date.now(),hora: "11",servicos: [this.servicos[2], this.servicos[3]], situacao: "Aprovado"},
+    {id: 1, idBarbeiro: 2, nomeCliente: 'Adriel',data: Date.now(),hora: "11",servicos: [this.servicos[2], this.servicos[3]], situacao: "Pendente"},
+    {id: 1, idBarbeiro: 2, nomeCliente: 'Adriel',data: Date.now(),hora: "11",servicos: [this.servicos[2], this.servicos[3]], situacao: "Aprovado"},
+    {id: 1, idBarbeiro: 2, nomeCliente: 'Adriel',data: Date.now(),hora: "11",servicos: [this.servicos[2], this.servicos[3]], situacao: "Pendente"},
+    {id: 1, idBarbeiro: 2, nomeCliente: 'Adriel',data: Date.now(),hora: "11",servicos: [this.servicos[2], this.servicos[3]], situacao: "Aprovado"},
+    {id: 1, idBarbeiro: 2, nomeCliente: 'Adriel',data: Date.now(),hora: "11",servicos: [this.servicos[2], this.servicos[3]], situacao: "Pendente"},
+    {id: 1, idBarbeiro: 2, nomeCliente: 'Ma',data: Date.now(),hora: "11",servicos: [this.servicos[1], this.servicos[0]], situacao: "Aprovado"}
   ]
   
   
-  displayedColumns: string[] = [ 'nome','horario', 'ações'];
+  displayedColumns: string[] = [ 'nome','horario','servicos','ações'];
   dataSource = this.marcacoes;
   ngOnInit(): void {
-
+    console.log(this.marcacoes);
   this.filtraListaPorData();
   }
 

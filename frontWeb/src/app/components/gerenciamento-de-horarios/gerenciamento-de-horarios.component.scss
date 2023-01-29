@@ -1,4 +1,4 @@
-#id, div{
+div{
   display: flex;
   align-items: flex-start;
 }
@@ -15,11 +15,25 @@
   margin-left: 0%;
   margin-right: 8%;
 }
-
-.name, .name[_ngcontent-dpw-c147]{
-  color: aliceblue;
-  width: 10%;
+.action-buttons  {
+  display: block;
+  
 }
+button{
+  margin-right: 1%;
+}
+
+.color-line-pendente {
+  background-color: #494b4d
+}
+
+
+
+mat-form-field, mat-label, input, mat-datepicker-toggle, mat-datepicker{
+  color: aliceblue;
+}
+
+
 .table{
   background-color: black;
 }
@@ -37,10 +51,12 @@ td,th{
   color: aliceblue;
   font-size: large;
 }
-
-.name{
-  width: 90%;
-  
+.servicos{
+  display: flex;
+  justify-content: center;
+}
+p{
+  margin-right: 2%;
 }
 .actions{
   width: 10%;
