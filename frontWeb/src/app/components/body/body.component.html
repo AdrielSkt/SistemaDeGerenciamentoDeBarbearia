@@ -1,9 +1,10 @@
 
-  <div *ngIf="false">
-
+  <div *ngIf="true">
+    <app-login></app-login>
   </div>
-<body *ngIf="true">
-
+  
+<body *ngIf="false">
+  <div>
   <mat-toolbar color="primary">
     <button mat-icon-button (click)="drawer.toggle()">
       <mat-icon >menu</mat-icon>
@@ -23,5 +24,6 @@
     </mat-drawer>
     <router-outlet></router-outlet>
   </mat-drawer-container>
+</div>
   <footer></footer>
 </body>

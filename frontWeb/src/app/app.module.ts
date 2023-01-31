@@ -22,6 +22,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { GerenciamentoDeHorariosComponent } from './components/gerenciamento-de-horarios/gerenciamento-de-horarios.component';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { LoginComponent } from './components/login/login.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     FooterComponent,
     BodyComponent,
     MenuComponent,
-    GerenciamentoDeHorariosComponent
+    GerenciamentoDeHorariosComponent,
+    LoginComponent
 
 
 
@@ -58,7 +60,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
     ReactiveFormsModule,
     MatProgressBarModule,
     MatDatepickerModule,
-    MatGridListModule
+    MatGridListModule,
 
 
 

@@ -1,0 +1,32 @@
+
+    <form class="content" [formGroup]="formularioLogin">
+        <h1>
+            LOGIN
+        </h1>
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  <mat-card class="formulario">
+    <p id="texto">
+
+        <mat-form-field appearance="fill">
+          <mat-label>E-mail</mat-label>
+          <input matInput placeholder="Escreva seu e-mail" formControlName="email">
+          <mat-icon matSuffix>markunread</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field  appearance="fill">
+          <mat-label>Senha </mat-label>
+          <input  matInput [type]="hide ? 'password' : 'text'" placeholder="Escreva sua senha" formControlName="senha">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+
+      </p>
+     
+</mat-card>
+<div class="save-button">
+    <button class="addButton" mat-raised-button color="primary" routerLink="/usuario/read">
+      <mat-icon>login</mat-icon> Login
+    </button>
+  </div>
+</form>
