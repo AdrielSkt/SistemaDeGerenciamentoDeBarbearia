@@ -7,7 +7,8 @@ const routes: Routes = [
   {path: '', component: MenuComponent},
   {path: 'menu', component: MenuComponent},
   {path: 'gerenciar-marcacoes', component: GerenciamentoDeHorariosComponent},
-  {path: 'usuario', loadChildren: () => import('./components/usuario/usuario.module').then(x =>x.UsuarioModule)}
+  {path: 'usuario', loadChildren: () => import('./components/usuario/usuario.module').then(x =>x.UsuarioModule)},
+  {path: 'servicos', loadChildren: () => import('./components/servicos/servicos.module').then(x =>x.ServicosModule)}
 ];
 
 @NgModule({
