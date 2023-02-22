@@ -12,7 +12,7 @@ import { Usuario } from '../../../models/usuario-model';
   encapsulation: ViewEncapsulation.None
 })
 export class UsuarioEditComponent implements OnInit {
-  public idDeEdicao!: number;
+  public idDeEdicao!: String;
   public hide = true;
   public isChecked: boolean = false;
   public formulario!: FormGroup;
@@ -27,9 +27,9 @@ export class UsuarioEditComponent implements OnInit {
     { id: 4, nome: "Progressiva", valor: 60 },
   ]
   public usuarios: Usuario[] = [
-    { id: 1, nome: 'Adriel', email: 'adr@mail.com', imagem: undefined, senha: 'dasdasda', servicos: [1, 2], sobre: 'menoooooooo' },
-    { id: 2, nome: 'Caio', email: 'adr@mail.com', imagem: undefined, senha: 'dasdasda', servicos: [3, 4], sobre: 'menoooooooo' },
-    { id: 3, nome: 'Igor', email: 'adr@mail.com', imagem: undefined, senha: 'dasdasda', servicos: [4], sobre: 'menoooooooo' }
+    { id: "1", nome: 'Adriel', email: 'adr@mail.com', imagem: undefined, senha: 'dasdasda', servicos: [1, 2], sobre: 'menoooooooo' },
+    { id: "2", nome: 'Caio', email: 'adr@mail.com', imagem: undefined, senha: 'dasdasda', servicos: [3, 4], sobre: 'menoooooooo' },
+    { id: "3", nome: 'Igor', email: 'adr@mail.com', imagem: undefined, senha: 'dasdasda', servicos: [4], sobre: 'menoooooooo' }
   ]
 
   constructor(private rotaDeParametro: ActivatedRoute, private formBuilder: FormBuilder) {

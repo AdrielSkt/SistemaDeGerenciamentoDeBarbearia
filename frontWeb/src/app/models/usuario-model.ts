@@ -1,7 +1,7 @@
 import { Servico } from "./servicos-model";
 
 export interface Usuario {
-    id: Number,
+    id: String,
     nome: String,
     email: String,
     senha: String,
