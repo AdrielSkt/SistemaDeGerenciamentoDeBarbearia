@@ -1,11 +1,25 @@
 import React from "react";
 
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet,} from "react-native";
 
 export default function Footer(){
   return(
     <View>
-      <Text>Created by Adriel and Caio</Text>
+      <Text style={styles.textFooter}>Created by Adriel and Caio</Text>
     </View>
   )
 }
+
+
+
+const styles = StyleSheet.create(
+  {
+    textFooter:{
+      position: "absolute",
+      bottom: -150,
+      width: 400,
+      textAlign: "center",
+
+    }
+  }
+)

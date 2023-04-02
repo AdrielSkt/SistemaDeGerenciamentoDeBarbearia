@@ -7,7 +7,6 @@ import {
     StyleSheet,
   } from "react-native";
 import UserMessage from "../UserMessage";
-
 export default function Menu({mensagem}){
 return(
     <View>
