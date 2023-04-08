@@ -1,27 +1,49 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { 
     View,
      Text,
     TouchableOpacity,
     Image,
     StyleSheet,
+    Animated
   } from "react-native";
 import UserMessage from "../UserMessage";
+
 export default function Menu({mensagem}){
+
+const [largura, setLargura] = useState(new Animated.Value(0));
+
+
+Animated.timing(
+    largura,
+    {
+        toValue: 380,
+        duration: 2000,
+        useNativeDriver: false
+    }
+).start();
+
+
 return(
     <View>
         <View>
         <UserMessage mensagem={mensagem}></UserMessage>
         </View>
+
         <View style={styles.buttons}>
+            <Animated.View style={{width: largura}}>
             <TouchableOpacity activeOpacity={0.5} style={styles.button}>
                 <Image style={styles.btnImage} source={require('./../../img/menu/marcarHorario.jpg')} />
                 <Text style={styles.btnText}>Marcar Horario</Text>
             </TouchableOpacity>
+            </Animated.View>
+
+            <Animated.View style={{width: largura}}>
             <TouchableOpacity activeOpacity={0.5} style={styles.button}>
                 <Image style={styles.btnImage} source={require('./../../img/menu/horariosMarcados.jpg')} />
                 <Text style={styles.btnText}>Horarios Marcados</Text>
             </TouchableOpacity>
+            </Animated.View>
         </View>
     </View>
 
@@ -33,7 +55,6 @@ const styles = StyleSheet.create({
         marginTop: 70,   
     },
     button:{
-        width: 380,
         height: 120,
         backgroundColor: 'rgba(123, 139, 231, 0.5)',
         borderRadius: 70/1,

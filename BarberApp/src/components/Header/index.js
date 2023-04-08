@@ -4,23 +4,23 @@ import {
   StyleSheet, 
   Text, StatusBar, 
   TouchableOpacity,
-  Image 
+  Image, 
+  ImageBackground
 } from "react-native";
 import {Feather} from '@expo/vector-icons';
 
-
 const statusBarHeight = StatusBar.currentHeight ? StatusBar.currentHeight + 22 : 64;
-
+const imagem = {uri: 'https://barbeariabrothersbh.com.br/wp-content/uploads/2021/12/IMG_7144-1024x819.jpg'};
 export default function Header({nomeCliente}){
   return (
     <View style={styles.container}>
           <View style={styles.content}>
             <TouchableOpacity activeOpacity={0.5} style={styles.userbutton}>
-                <Image style={styles.userImage} source={require('./../../img/219983.png')} />
+                <Image style={styles.userImage} source={require('./../../img/219983.png')} />      
             </TouchableOpacity>
             <Text style={styles.username}>{nomeCliente}</Text>
           </View>
-
+          
       </View>
   )
 }
@@ -29,8 +29,7 @@ export default function Header({nomeCliente}){
 
 const styles = StyleSheet.create({
 container:{
-  backgroundColor: '#1400FF',
-  //backgroundColor: '#000000',
+  backgroundColor: '#00000F',
   paddingTop: statusBarHeight,
   flexDirection: 'row',
   paddingStart: 16,
