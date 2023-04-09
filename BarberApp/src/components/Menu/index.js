@@ -11,8 +11,8 @@ import UserMessage from "../UserMessage";
 
 export default function Menu({mensagem}){
 
-const [largura, setLargura] = useState(new Animated.Value(0));
-
+const [largura, setLargura] = useState(new Animated.Value(125));
+const [animation] = useState(new Animated.Value(0));
 
 Animated.timing(
     largura,
@@ -22,6 +22,30 @@ Animated.timing(
         useNativeDriver: false
     }
 ).start();
+
+
+
+useEffect(() => {
+    Animated.timing(animation, {
+      toValue: 1,
+      duration: 2000,
+      useNativeDriver: true
+    }).start();
+  }, []);
+
+
+  const animatedStyles = {
+    opacity: animation,
+    transform: [
+      {
+        translateX: animation.interpolate({
+          inputRange: [0, 1],
+          outputRange: [-50, 0]
+        })
+      }
+    ]
+  };
+
 
 
 return(
@@ -34,14 +58,14 @@ return(
             <Animated.View style={{width: largura}}>
             <TouchableOpacity activeOpacity={0.5} style={styles.button}>
                 <Image style={styles.btnImage} source={require('./../../img/menu/marcarHorario.jpg')} />
-                <Text style={styles.btnText}>Marcar Horario</Text>
+                <Animated.Text style={[styles.btnText, animatedStyles]}>Marcar Horario</Animated.Text>
             </TouchableOpacity>
             </Animated.View>
 
             <Animated.View style={{width: largura}}>
             <TouchableOpacity activeOpacity={0.5} style={styles.button}>
                 <Image style={styles.btnImage} source={require('./../../img/menu/horariosMarcados.jpg')} />
-                <Text style={styles.btnText}>Horarios Marcados</Text>
+                <Animated.Text style={[styles.btnText, animatedStyles]}>Horarios Marcados</Animated.Text>
             </TouchableOpacity>
             </Animated.View>
         </View>
