@@ -3,16 +3,16 @@ import { View, Text } from "react-native";
 import UserMessage from "../../components/UserMessage";
 import Header from "../../components/Header";
 
-export default function Agendar({nomeCliente}){
+export default function Sobre({nomeCliente}){
 
   return (
       <View>
-        <Header nomeCliente={nomeCliente}/>
+          <Header nomeCliente={nomeCliente}/>
       <View>
-          <UserMessage mensagem={"Aobah, vamo marcar um cortezin ? !!"}></UserMessage>
+          <UserMessage mensagem={"Aqui um pouquinho sobre nós !!"}></UserMessage>
       </View>
           <Text>
-            Agendar
+            Sobre
           </Text>
       </View>
   )

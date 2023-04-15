@@ -10,12 +10,9 @@ const nomeCliente = 'Osorio Adriel';
 export default function Home() {
   return (
     <View style={styles.container}>
-      <Header nomeCliente={nomeCliente}/>
       <StatusBar style="auto" />
-      {/* <Menu mensagem={"Bem vindo "+nomeCliente+" !"}></Menu> */}
-      {/* <Menu mensagem={"Bem vindo "+nomeCliente+" !"}></Menu> */}
       <NavigationContainer>      
-        <Routes></Routes>
+        <Routes nomeCliente={nomeCliente}></Routes>
       </NavigationContainer>
 
     </View>

@@ -1,19 +1,21 @@
 import React, {useState, useEffect} from "react";
 import { View, Text } from "react-native";
 import UserMessage from "../../components/UserMessage";
+import Header from "../../components/Header";
 
-export default function Menu ({mensagem}){
+export default function Menu ({nomeCliente}){
 
 
 
   return(
     <View>
+            <Header nomeCliente={nomeCliente}/>
       <View>
-          <UserMessage mensagem={mensagem}></UserMessage>
+          <UserMessage mensagem={"Bem vindo "+nomeCliente+" !!"}></UserMessage>
       </View>
       <View>
           <Text>
-            Agendar
+            Menu
           </Text>
       </View>
     </View>
