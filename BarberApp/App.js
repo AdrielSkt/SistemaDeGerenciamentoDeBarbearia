@@ -1,5 +1,5 @@
 import Home from './src/pages/Home';
-
+import 'react-native-gesture-handler';
 
 import store from './src/store';
 import {fonts} from './src/styles/theme.json'
