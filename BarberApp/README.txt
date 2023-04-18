@@ -1,3 +1,4 @@
 #Iniciar aplicação
 npm install
-expo start
+expo install
+expo start || npx expo start

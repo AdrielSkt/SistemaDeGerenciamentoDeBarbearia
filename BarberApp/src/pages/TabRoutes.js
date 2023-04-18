@@ -19,7 +19,7 @@ export default function Routes({nomeCliente}){
       backgroundColor: 'black' },
       tabBarActiveTintColor: '#0B2BCA',
       }} >
-      <Tab.Screen name="Menu" children={()=><Menu nomeCliente={nomeCliente}/>} options={{tabBarIcon: ({color, size})=> (<Entypo name="documents" color={color} size={size}/>)}}/>
+      <Tab.Screen name="Menu" children={({navigation})=><Menu navigation={navigation} nomeCliente={nomeCliente}/>} options={{tabBarIcon: ({color, size})=> (<Entypo name="documents" color={color} size={size}/>)}}/>
       <Tab.Screen name="Agendamentos" children={()=><Agendamentos nomeCliente={nomeCliente}/>} options={{tabBarIcon: ({color, size})=> (<Entypo name="colours" color={color} size={size}/>)}}/>
       <Tab.Screen name="Agendar" children={()=><Agendar nomeCliente={nomeCliente}/>} options={{tabBarLabel: '', tabBarIcon: ({ size, focused})=> (<ButtonAgendar size={size} focused={focused}/>)}}/>
       <Tab.Screen name="Perfil" children={()=><Perfil nomeCliente={nomeCliente}/>} options={{tabBarIcon: ({color, size})=> (<Entypo name="v-card" color={color} size={size}/>)}}/>
