@@ -69,7 +69,7 @@ export default function Menu ({nomeCliente, navigation}){
       
       <View style={styles.buttons}>
             <Animated.View style={{width: largura}}>
-            <TouchableOpacity activeOpacity={0.5} style={styles.button} onPress={()=>{navigation.navigate('Agendar')}}>
+            <TouchableOpacity activeOpacity={0.5} style={styles.button} onPress={()=>{navigation.navigate('Login')}}>
                 <Image style={styles.btnImage} source={require('./../../img/menu/marcarHorario.jpg')}/>
                 <View>
                 <Animated.Text style={[styles.btnText, animatedStyles]}>Marcar Horario</Animated.Text>
