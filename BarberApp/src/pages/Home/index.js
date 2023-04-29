@@ -16,11 +16,11 @@ export default function Home() {
     <View style={styles.container}>
       <StatusBar style="auto" />
       <NavigationContainer>  
-        <Stack.Navigator initialRouteName="PagInit">
-          <Stack.Screen name="PagInit" children={()=> auth ? <Login></Login> : <Routes nomeCliente={nomeCliente}></Routes>}></Stack.Screen>
+        <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName="PagInicial">
+          <Stack.Screen name="PagInicial" component={Login}></Stack.Screen>
+          <Stack.Screen name="Home" children={(auth)=> auth ? <Routes nomeCliente={nomeCliente}></Routes> : <Login></Login>}></Stack.Screen>
           <Stack.Screen name="Login" component={Login}></Stack.Screen>
         </Stack.Navigator>
-          
       </NavigationContainer>
 
     </View>

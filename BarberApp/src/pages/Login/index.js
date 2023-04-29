@@ -39,7 +39,7 @@ export default function Login(){
     <KeyboardAvoidingView style={styles.container}>
         <View style={styles.logo}>
           <Animated.Image style={[{width:logo.x, height:logo.y, opacity: opacity},styles.imageLogo]}
-            source={require('../../img/logo.png')}
+            source={require('../../img/logoTa.png')}
           />
         </View>
         <Animated.View 
@@ -56,7 +56,7 @@ export default function Login(){
             autoCorrect={false}
             onChangeText={()=>{}}/>
 
-            <TouchableOpacity style={styles.btnSubmit} onPress={()=>{navigation.navigate('PagInit')}}>
+            <TouchableOpacity style={styles.btnSubmit} onPress={()=>{navigation.navigate('Home', {auth:true})}}>
                 <Text style={styles.submitTxt}>Acessar</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.btnCreate}>

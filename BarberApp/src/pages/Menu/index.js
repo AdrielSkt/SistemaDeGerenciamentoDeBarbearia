@@ -21,26 +21,18 @@ import { NavigationContainer } from "@react-navigation/native";
 export default function Menu ({nomeCliente, navigation}){
 
 
-  const [largura, setLargura] = useState(new Animated.Value(125));
+  const [largura] = useState(new Animated.Value(125));
   const [animation] = useState(new Animated.Value(0));
   
-  Animated.timing(
-      largura,
-      {
-          toValue: 380,
-          duration: 2000,
-          useNativeDriver: false
-      }
-  ).start();
+
   
   
   
   useEffect(() => {
-      Animated.timing(animation, {
-        toValue: 1,
-        duration: 2000,
-        useNativeDriver: true
-      }).start();
+    Animated.parallel([
+      Animated.timing(largura,{toValue: 380, duration: 2000, useNativeDriver: false}),
+      Animated.timing(animation, {toValue: 1, duration: 2000, useNativeDriver: true})
+    ]).start();
     }, []);
   
   
