@@ -6,6 +6,7 @@ import Menu from '../Menu';
 import {NavigationContainer} from '@react-navigation/native';
 import{createStackNavigator} from '@react-navigation/stack';
 import Login from '../Login';
+import Registro from '../Registro';
 
 
 const Stack = createStackNavigator();
@@ -20,6 +21,7 @@ export default function Home() {
           <Stack.Screen name="PagInicial" component={Login}></Stack.Screen>
           <Stack.Screen name="Home" children={(auth)=> auth ? <Routes nomeCliente={nomeCliente}></Routes> : <Login></Login>}></Stack.Screen>
           <Stack.Screen name="Login" component={Login}></Stack.Screen>
+          <Stack.Screen name="Registro" component={Registro}></Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
 

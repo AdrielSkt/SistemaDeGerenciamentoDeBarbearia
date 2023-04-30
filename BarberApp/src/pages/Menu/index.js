@@ -65,7 +65,7 @@ export default function Menu ({nomeCliente, navigation}){
                 <Image style={styles.btnImage} source={require('./../../img/menu/marcarHorario.jpg')}/>
                 <View>
                 <Animated.Text style={[styles.btnText, animatedStyles]}>Marcar Horario</Animated.Text>
-                <ProgressBar indeterminate visible={true} />
+                <ProgressBar color="blue" style={{ backgroundColor: 'black' }} indeterminate visible={true} />
                 </View>
             </TouchableOpacity>
             </Animated.View>
@@ -75,7 +75,7 @@ export default function Menu ({nomeCliente, navigation}){
                 <Image style={styles.btnImage} source={require('./../../img/menu/horariosMarcados.jpg')} />
                 <View>
                 <Animated.Text style={[styles.btnText, animatedStyles]}>Horarios Marcados</Animated.Text>
-                <ProgressBar indeterminate visible={true}/>
+                <ProgressBar color="blue" style={{ backgroundColor: 'black' }} indeterminate visible={true}/>
                 </View>
             </TouchableOpacity>
             </Animated.View>
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   },
   button:{
       height: 120,
-      backgroundColor: 'rgba(123, 139, 231, 0.5)',
+      backgroundColor: '#000',
       borderRadius: 70/1,
       marginTop: 40,
       marginLeft: 10,
@@ -106,6 +106,7 @@ const styles = StyleSheet.create({
       borderRadius: 70/1,
   },
   btnText:{
+      color: '#fff',
       fontSize: 20,
       textShadowRadius: 10,
       textAlign: 'center',

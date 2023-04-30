@@ -3,16 +3,20 @@ import {KeyboardAvoidingView, View, TouchableOpacity, Text, StyleSheet, Animated
 import {TextInput} from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
-export default function Login(){
+export default function Registro(){
   const navigation = useNavigation();
   const [offSett] = useState(new Animated.ValueXY({x:0, y: 90}));
   const [opacity] = useState(new Animated.Value(0));
-  const [logo] = useState(new Animated.ValueXY({x:250, y: 250}));
+  const [logo] = useState(new Animated.Value(32));
 
   const [hidePassword, setHidePassword] = useState(true);
-
+  const [hideConfirmPassword, setHideConfirmaPassword] = useState(true);
+  
   const togglePasswordVisibility = () => {
     setHidePassword(!hidePassword);
+  };
+  const togglePasswordConfirmVisibility = () => {
+    setHideConfirmaPassword(!hideConfirmPassword);
   };
 
   useEffect(()=> {
@@ -30,23 +34,19 @@ export default function Login(){
 
   function keyboardDidShow(){
     Animated.parallel([
-      Animated.timing(logo.x, {toValue: 150, duration:100, useNativeDriver: false,}),
-      Animated.timing(logo.y, {toValue: 150, duration:100, useNativeDriver: false,}),
+      Animated.timing(logo, {toValue: 22, duration:100, useNativeDriver: false,}),
     ]).start();
   }
 
   function keyboardDidHide(){
     Animated.parallel([
-      Animated.timing(logo.x, {toValue: 250, duration:100, useNativeDriver: false,}),
-      Animated.timing(logo.y, {toValue: 250, duration:100, useNativeDriver: false,}),
+      Animated.timing(logo, {toValue: 32, duration:100, useNativeDriver: false,}),
     ]).start();
   }
   return(
     <KeyboardAvoidingView style={styles.container}>
-        <View style={styles.logo}>
-          <Animated.Image style={[{width:logo.x, height:logo.y, opacity: opacity},styles.imageLogo]}
-            source={require('../../img/logoTa.png')}
-          />
+        <View style={styles.header}>
+          <Animated.Text style={[{fontSize: logo, opacity: opacity},styles.title]}>Registre-se</Animated.Text>
         </View>
         <Animated.View 
         style={[styles.body,{opacity: opacity,transform:[{translateY: offSett.y }]}]}>
@@ -65,12 +65,22 @@ export default function Login(){
             placeholder='Senha'
             autoCorrect={false}
             onChangeText={()=>{}}/>
+          <TextInput style={styles.input}
+                  secureTextEntry={hideConfirmPassword}
+                  right={
+                    <TextInput.Icon
+                      icon={hideConfirmPassword ? 'eye' : 'eye-off'}
+                      onPress={togglePasswordConfirmVisibility}
+                    />}
+            placeholder='Confirmar Senha'
+            autoCorrect={false}
+            onChangeText={()=>{}}/>
 
-            <TouchableOpacity style={styles.btnSubmit} onPress={()=>{navigation.navigate('Home', {auth:true})}}>
-                <Text style={styles.submitTxt}>Acessar</Text>
+            <TouchableOpacity style={styles.btnSubmit} onPress={()=>{navigation.navigate('Login')}}>
+                <Text style={styles.submitTxt}>Cadastrar</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.btnCreate} onPress={()=>{navigation.navigate('Registro')}}>
-                <Text style={styles.createTxt}>Criar conta</Text>
+            <TouchableOpacity style={styles.btnCreate} onPress={()=>{navigation.navigate('Login')}}>
+                <Text style={styles.createTxt}>Voltar</Text>
             </TouchableOpacity>
         </Animated.View>
     </KeyboardAvoidingView>
@@ -85,15 +95,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#000919',
     paddingBottom: 10
   },
-  logo:{
-    flex: 1,
+  header:{
+    flex: 0.2,
     justifyContent: 'center',
   },
-  imageLogo:{
-    borderRadius: 120/1,
-  },
   body:{
-    flex: 1,
+    flex: 0.5,
     alignItems: 'center',
     justifyContent: 'center',
     width: '90%'
@@ -125,5 +132,8 @@ const styles = StyleSheet.create({
   createTxt:{
     color: '#FFF',
     
+  },
+  title:{
+    color: '#FFF'
   }
 })
