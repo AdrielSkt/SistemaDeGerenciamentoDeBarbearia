@@ -6,9 +6,6 @@ import { FlatList, StyleSheet } from "react-native";
 import RenderSlides from "../../components/SliderBarbeiros";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-
-
-
 const barbeiros = [
   {
     id:'1',
@@ -34,21 +31,24 @@ const barbeiros = [
   }
 ];
 
-
 export default function Agendar({nomeCliente}){
   let flatListRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handleButtonPress = (index) => {
+    flatListRef.current.scrollToIndex({animated: true, index: index});
+    setCurrentIndex(index);
+  };
 
   const onViewRef = useRef(({changed})=> {
     if(changed[0].isViewable){
       setCurrentIndex(changed[0].index);
     }
-  })
+  });
 
-  const handleButtonPress = (index) => {
-    flatListRef.current.scrollToIndex({animated: true, index: index});
+  const onFlatlistItemChange = (index) => {
     setCurrentIndex(index);
-  }
+  };
 
   return (
     <View>
@@ -66,6 +66,11 @@ export default function Agendar({nomeCliente}){
         style={styles.carousel}
         ref={flatListRef}
         onViewableItemsChanged={onViewRef.current}
+        onMomentumScrollEnd={(e) => {
+          const offset = e.nativeEvent.contentOffset.x;
+          const index = Math.round(offset / Dimensions.get('window').width);
+          onFlatlistItemChange(index);
+        }}
       />
       <View style={styles.dotView}>
         {barbeiros.map(({}, index)=> (
@@ -84,7 +89,7 @@ export default function Agendar({nomeCliente}){
 const styles = StyleSheet.create({
   carousel:{
       maxHeight:400,
-      marginTop: 90
+      marginTop: 50
 
   },
   dotView:{
