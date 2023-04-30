@@ -13,17 +13,24 @@ const barbeiros = [
   {
     id:'1',
     nome: 'Caio',
-    sobre: 'LAlaLAlaLAlaLA',
-    imagem: require('../../img/logoTrs.png'),
+    sobre: 'Um barbeiro é um profissional que trabalha com cortes e cuidados com cabelo e barba. ',
+    imagem: require('../../img/menu/horariosMarcados.jpg'),
     servicos:[
-      {id: 1, nome: 'corte'}
+      {id: 1, nome: 'corte', imagem: require('../../img/219983.png')},
+      {id: 2, nome: 'Barba', imagem: require('../../img/219983.png')},
+      {id: 3, nome: 'Progressiva', imagem: require('../../img/219983.png')}
     ]
   },
   {
     id:'2',
     nome: 'Lucas',
-    sobre: 'LAlaLAlaLAlaLA',
-    imagem: require('../../img/logoTrs.png'),
+    sobre: 'Um barbeiro é um profissional que trabalha com cortes e cuidados com cabelo e barba. ',
+    imagem: require('../../img/219983.png'),
+    servicos:[
+      {id: 1, nome: 'corte', imagem: require('../../img/219983.png')},
+      {id: 2, nome: 'Barba', imagem: require('../../img/219983.png')},
+      {id: 3, nome: 'Progressiva', imagem: require('../../img/219983.png')}
+    ]
   }
 ];
 
@@ -76,7 +83,8 @@ export default function Agendar({nomeCliente}){
 
 const styles = StyleSheet.create({
   carousel:{
-      maxHeight:300,
+      maxHeight:400,
+      marginTop: 90
 
   },
   dotView:{

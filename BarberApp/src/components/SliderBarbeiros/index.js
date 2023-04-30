@@ -5,15 +5,34 @@ import { View, Text, Image, StyleSheet, TouchableOpacity, Dimensions } from "rea
 
 const{width, height} = Dimensions.get("window");
 export default function RenderSlides({item}){
+  const servicos = item.servicos.map((servico, index) => (
+    <View key={servico.id} style={[styles.servicos,{marginLeft: index === 0 ? 0 : 20}]}>
+      <TouchableOpacity>
+        <Image source={servico.imagem} style={styles.servicoImg} />
+      </TouchableOpacity>
+      <Text style={{color: '#fff'}}>{servico.nome}</Text>
+    </View>
+  ));
+
+  const chunks = item.sobre.match(/.{1,45}/g);
+  const formattedText = chunks.join('\n');
   return(
     <TouchableOpacity
-    onPress={()=> console.log('click')}
+    onPress={()=> console.log('click'+ item.nome)}
     activeOpacity={1}
+    
+    
     >
-        <Image source={item.imagem} style={styles.imagem}/>
+      <View style={styles.footer}>
+      <Text style={styles.footerTitle}>{item.nome}</Text>
+      </View>
+        <Image source={item.imagem} style={[styles.imagem]}/>
         <View style={styles.footer}>
-          <Text style={styles.footerTitle}>{item.nome}</Text>
-          <Text style={styles.footerDisc}>{item.sobre}</Text>
+          
+          <Text style={styles.footerDisc}>{formattedText}</Text>
+          <View style={{flexDirection:"row"}}>
+            {servicos}
+          </View>
         </View>
     </TouchableOpacity>
   )
@@ -24,6 +43,7 @@ const styles = StyleSheet.create({
   container:{
     flex:1,
     backgroundColor: '#FFF',
+    borderRadius: 50
 
 
   },
@@ -31,12 +51,11 @@ const styles = StyleSheet.create({
     width,
     height: 200,
     resizeMode: "cover",
-    marginVertical: 20, 
   },
   footer: {
-    flexDirection: "row",
+    flexDirection: "column",
     justifyContent: "space-between",
-    height: 50,
+
     paddingHorizontal: 40,
     alignItems: "center",
     backgroundColor:"#000"
@@ -50,5 +69,14 @@ const styles = StyleSheet.create({
   },
   footerDisc:{
     color: '#fff',
+  },
+  servicos:{
+    marginTop: 10,
+    alignItems:"center",
+    alignContent:"center",
+  },
+  servicoImg:{
+    width: 20,
+    height: 20
   }
 })
