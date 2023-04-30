@@ -20,7 +20,7 @@ export default function RenderSlides({item, index}){
     <TouchableOpacity
     onPress={()=> console.log('click'+ item.nome)}
     activeOpacity={1}
-    style={{ width: width/2, marginLeft: index === 0 ? 100: 0, marginRight: 100 }}
+    style={{ width: width/2, marginLeft: 100, marginRight: 100 }}
     
     >
       <View style={styles.footer}>
