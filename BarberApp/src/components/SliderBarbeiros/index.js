@@ -4,7 +4,9 @@ import { View, Text, Image, StyleSheet, TouchableOpacity, Dimensions } from "rea
 
 
 const{width, height} = Dimensions.get("window");
-export default function RenderSlides({item, index}){
+
+
+export default function RenderSlides({item, index, navigation}){
   const servicos = item.servicos.map((servico, index) => (
     <View key={servico.id} style={[styles.servicos,{marginLeft: index === 0 ? 0 : 20}]}>
       <TouchableOpacity>
@@ -18,7 +20,7 @@ export default function RenderSlides({item, index}){
   const formattedText = chunks.join('\n');
   return(
     <TouchableOpacity
-    onPress={()=> console.log('click'+ item.nome)}
+    onPress={()=>{navigation.navigate('Login')}}
     activeOpacity={1}
     style={{ width: width/2, marginLeft: 100, marginRight: 100 }}
     

@@ -11,13 +11,6 @@ import UserMessage from "../../components/UserMessage";
 import Header from "../../components/Header";
 import { ProgressBar} from 'react-native-paper';
 
-
-
-import {Canvas, Fill, Group, LinearGradient, Path} from '@shopify/react-native-skia';
-import { SafeAreaView } from "react-native-safe-area-context";
-import { NavigationContainer } from "@react-navigation/native";
-
-
 export default function Menu ({nomeCliente, navigation}){
 
 
