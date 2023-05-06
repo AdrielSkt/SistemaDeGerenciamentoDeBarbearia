@@ -26,9 +26,7 @@ import { LoginComponent } from './components/login/login.component';
 
 
 import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore'
 import { environment } from '../environments/environment';
 
 @NgModule({
@@ -67,13 +65,8 @@ import { environment } from '../environments/environment';
     MatProgressBarModule,
     MatDatepickerModule,
     MatGridListModule,
-    // AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule,
-    AngularFirestoreModule,
-    AngularFireStorageModule
-
-
-
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
