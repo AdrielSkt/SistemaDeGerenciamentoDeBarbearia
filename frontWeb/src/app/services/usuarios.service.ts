@@ -18,39 +18,4 @@ export class UsuarioService extends CrudService {
     super('usuarios');
   }
 
-
-  // getAll(): Usuario[] {
-  //   let reqGet = ref( this.dbPath);
-  //   let usuarios: Usuario[] = [];
-  //   onValue(reqGet, (snapshot) => {
-  //     snapshot.forEach((childSnapshot) => {
-  //       let usuario!: Usuario;
-  //       if (childSnapshot.key != null) {
-  //         usuario.id = childSnapshot.key;
-  //         usuario = Object.create(childSnapshot.val());
-  //         usuarios.push(usuario);
-  //       }
-  //       console.log(usuarios);
-  //     });
-  //   }, {
-  //     onlyOnce: true
-  //   });
-  //   return usuarios;
-  // }
-
-
-
-  // obterUsuarios(): ListagemUsuarios[] {
-  //   let reqGet = ref(this.db, this.dbPath);
-  //   let usuarios: ListagemUsuarios[] = [];
-  //   let user: ListagemUsuarios;
-  //   onValue(reqGet, (snapshot) => {
-
-  //     const data = snapshot.val();
-
-  //     console.log(data)
-  //   });
-  //   return usuarios;
-  // }
-
 }

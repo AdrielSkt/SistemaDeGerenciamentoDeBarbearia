@@ -7,7 +7,7 @@ export interface Usuario {
     senha: String,
     sobre: String,
     imagem?: Blob,
-    servicos: Number[],
+    servicos: string[],
 
 
 

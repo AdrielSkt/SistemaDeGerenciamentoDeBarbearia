@@ -40,10 +40,10 @@ export class GerenciamentoDeHorariosComponent implements OnInit{
 
 
   public servicos: Servico[] = [
-    { id: 1, nome: "Corte de Cabelo", valor: 30 },
-    { id: 2, nome: "Corte de Barba", valor: 30 },
-    { id: 3, nome: "Sombrancelha", valor: 10 },
-    { id: 4, nome: "Progressiva", valor: 60 },
+    { id: "1", nome: "Corte de Cabelo", valor: 30 },
+    { id: "2", nome: "Corte de Barba", valor: 30 },
+    { id: "3", nome: "Sombrancelha", valor: 10 },
+    { id: "4", nome: "Progressiva", valor: 60 },
   ]
   public marcacoes: FormularioMarcacao[] = [
     {id: 1, idBarbeiro: 2, nomeCliente: 'Adriel',data: Date.now(),hora: "11",servicos: [this.servicos[2], this.servicos[3]], situacao: "Aprovado"},

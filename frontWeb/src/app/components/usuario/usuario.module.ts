@@ -15,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { RouterModule } from '@angular/router';
 
+
 @NgModule({
   declarations: [
     UsuariosReadComponent,

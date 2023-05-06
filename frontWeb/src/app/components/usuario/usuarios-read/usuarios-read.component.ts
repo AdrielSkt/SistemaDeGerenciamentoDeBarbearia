@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/services/usuarios.service';
 import { map } from 'rxjs/operators';
@@ -12,11 +12,11 @@ import { Usuario } from 'src/app/models/usuario-model';
   styleUrls: ['./usuarios-read.component.scss']
 })
 export class UsuariosReadComponent {
-  usuarios: Usuario[] = []
+  usuarios: ListagemUsuarios[] = [];
 
 
   displayedColumns: string[] = ['nome', 'ações'];
-  dataSource = this.usuarios;
+  dataSource: ListagemUsuarios[];
 
   constructor(private router: Router, private usuarioService: UsuarioService) { }
   ngOnInit() {
@@ -27,16 +27,17 @@ export class UsuariosReadComponent {
   buscarUsuarios() {
     this.usuarioService.getAll().then(result => {
       result.map((item: any) => {
-        const usuario: Usuario = {
+        const usuario: ListagemUsuarios = {
           id: item.payload.doc.id,
           ...item.payload.doc.data()
         }
         this.usuarios.push(usuario)
       })
-    })
+      this.dataSource = this.usuarios;
+    });
   }
 
-  public editarUsuario(id: Number) {
+  public editarUsuario(id: String) {
     this.router.navigate(['usuario/edit', id])
   }
 
@@ -44,8 +45,12 @@ export class UsuariosReadComponent {
     this.router.navigate(['usuario/create'])
   }
 
-  public excluirUsuario(id: Number) {
-    //Chamada para excluir usuario
+  public excluirUsuario(id: string) {
+    this.usuarioService.delete(id).then(() => {
+      this.usuarios = [];
+      this.buscarUsuarios();
+    });
+    
     //Chamada de listagem de usuario para atualizar lista exibida
 
   }

@@ -1,5 +1,5 @@
 export interface Servico{
-    id: Number,
+    id: string,
     nome: String,
     valor: Number,
     imagem?: Blob,

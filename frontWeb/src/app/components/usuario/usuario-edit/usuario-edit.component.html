@@ -48,8 +48,14 @@
 </mat-card>
 </form>
 
-<div class="save-button">
+<div class="save-button" *ngIf="idDeEdicao == undefined">
   <button class="addButton" mat-raised-button color="primary" (click)="salvar()" routerLink="/usuario/read">
     <mat-icon>save</mat-icon> Salvar
+  </button>
+</div>
+
+<div class="save-button" *ngIf="idDeEdicao != undefined">
+  <button class="addButton" mat-raised-button color="primary" (click)="atualizar()" routerLink="/usuario/read">
+    <mat-icon>save</mat-icon> Atualizar
   </button>
 </div>
