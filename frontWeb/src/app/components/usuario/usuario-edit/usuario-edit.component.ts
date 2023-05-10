@@ -41,7 +41,7 @@ export class UsuarioEditComponent implements OnInit {
   } 
 
   buscaUsuario(): void {
-        this.usuarioService.getOne(this.idDeEdicao).subscribe(result => {
+        this.usuarioService.getOne(this.idDeEdicao).then(result => {
           const data = result.payload.data() as Usuario;
           if (data) {
             this.usuarioEdit.id = result.payload.id;
@@ -59,7 +59,7 @@ export class UsuarioEditComponent implements OnInit {
 
   buscaServicos(): void{
     this.servicosService.getAll().then(result => {
-      result.map((item: any) => {
+      result.forEach((item: any) => {
         const servico: Servico = {
           id: item.payload.doc.id,
           ...item.payload.doc.data()

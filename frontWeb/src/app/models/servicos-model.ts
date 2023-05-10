@@ -1,7 +1,7 @@
 export interface Servico{
     id: string,
-    nome: String,
+    nome: string,
     valor: Number,
-    imagem?: Blob,
+    imagem?: string,
 
 }

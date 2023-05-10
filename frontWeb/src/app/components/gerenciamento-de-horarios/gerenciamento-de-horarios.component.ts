@@ -5,6 +5,8 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/
 import {default as _rollupMoment} from 'moment';
 import { FormularioMarcacao } from 'src/app/models/formulario-marcacao-model';
 import { Servico } from 'src/app/models/servicos-model';
+import { GerenciamentoHorariosService } from 'src/app/services/gerenciamento-horarios.service';
+import { ServicosService } from 'src/app/services/servicos.service';
 
 
 export const MY_FORMATS = {
@@ -39,36 +41,60 @@ export class GerenciamentoDeHorariosComponent implements OnInit{
   diaAtual?: String;
 
 
-  public servicos: Servico[] = [
-    { id: "1", nome: "Corte de Cabelo", valor: 30 },
-    { id: "2", nome: "Corte de Barba", valor: 30 },
-    { id: "3", nome: "Sombrancelha", valor: 10 },
-    { id: "4", nome: "Progressiva", valor: 60 },
-  ]
-  public marcacoes: FormularioMarcacao[] = [
-    {id: 1, idBarbeiro: 2, nomeCliente: 'Adriel',data: Date.now(),hora: "11",servicos: [this.servicos[2], this.servicos[3]], situacao: "Aprovado"},
-    {id: 1, idBarbeiro: 2, nomeCliente: 'Adriel',data: Date.now(),hora: "11",servicos: [this.servicos[2], this.servicos[3]], situacao: "Aprovado"},
-    {id: 1, idBarbeiro: 2, nomeCliente: 'Adriel',data: Date.now(),hora: "11",servicos: [this.servicos[2], this.servicos[3]], situacao: "Pendente"},
-    {id: 1, idBarbeiro: 2, nomeCliente: 'Adriel',data: Date.now(),hora: "11",servicos: [this.servicos[2], this.servicos[3]], situacao: "Aprovado"},
-    {id: 1, idBarbeiro: 2, nomeCliente: 'Adriel',data: Date.now(),hora: "11",servicos: [this.servicos[2], this.servicos[3]], situacao: "Pendente"},
-    {id: 1, idBarbeiro: 2, nomeCliente: 'Adriel',data: Date.now(),hora: "11",servicos: [this.servicos[2], this.servicos[3]], situacao: "Aprovado"},
-    {id: 1, idBarbeiro: 2, nomeCliente: 'Adriel',data: Date.now(),hora: "11",servicos: [this.servicos[2], this.servicos[3]], situacao: "Pendente"},
-    {id: 1, idBarbeiro: 2, nomeCliente: 'Ma',data: Date.now(),hora: "11",servicos: [this.servicos[1], this.servicos[0]], situacao: "Aprovado"}
-  ]
+  public servicos: Servico[] = [];
+  public servico: Servico = {id: '', nome: '', imagem: '', valor: 0}
+  public marcacoes: FormularioMarcacao[] = [];
   
   
-  displayedColumns: string[] = [ 'nome','horario','servicos','ações'];
-  dataSource = this.marcacoes;
+  displayedColumns: string[] = [ 'nome','horario','servicos','valor','ações'];
+  dataSource: FormularioMarcacao[];
+
+  constructor(private gerenciamentoHorariosService: GerenciamentoHorariosService, private servicosService: ServicosService){}
+
+
   ngOnInit(): void {
     console.log(this.marcacoes);
-  this.filtraListaPorData();
+    this.filtraListaPorData();
+    this.buscarHorariosMarcados();
   }
 
-  public filtraListaPorData(): void{
+  filtraListaPorData(): void{
     let dataFormatada = new Date(this.startDate);
     this.diaAtual = this.diasSemana[dataFormatada.getDay()];
-    console.log(this.diaAtual)
-      console.log(dataFormatada.toLocaleDateString("pt-BR"))
+      console.log(dataFormatada.toLocaleDateString("pt-BR").replace(/\//g, '-'))
+  }
+
+ async buscarHorariosMarcados(){
+    this.gerenciamentoHorariosService.getAll().then( async result => {
+      for (const item of result) {
+        const formulario: FormularioMarcacao = {
+          id: item.payload.doc.id,
+          ...item.payload.doc.data()
+        }
+        formulario.servicos = await Promise.all(formulario.servicos.map(async servico =>{ // <-- adicionar async aqui e usar Promise.all para aguardar todas as chamadas de função
+          await this.buscarServico(servico);
+          console.log(this.servico);
+          return this.servico.nome;
+        }));
+        this.marcacoes.push(formulario);
+      }
+      this.dataSource = this.marcacoes;
+    });
+  }
+
+  async buscarServico(id: string){
+     const result = await this.servicosService.getOne(id.trim()).then(result => {
+      const data = result.payload.data() as Servico;
+      if (data) {
+        this.servico.id = result.payload.id;
+        this.servico.nome = data.nome;
+        this.servico.imagem = data.imagem;
+        this.servico.valor = data.valor;
+      }
+    })
   }
 
 }
+
+
+

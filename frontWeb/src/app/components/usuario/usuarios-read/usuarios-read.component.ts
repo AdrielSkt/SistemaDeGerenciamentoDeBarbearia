@@ -17,7 +17,7 @@ export class UsuariosReadComponent {
 
   displayedColumns: string[] = ['nome', 'ações'];
   dataSource: ListagemUsuarios[];
-
+  
   constructor(private router: Router, private usuarioService: UsuarioService) { }
   ngOnInit() {
     //chamada do metodo de listagem de usuario

@@ -1,6 +1,7 @@
 import { Inject, inject, Injectable } from "@angular/core";
 import { Action, AngularFirestore, DocumentChangeAction, DocumentSnapshot, QuerySnapshot } from "@angular/fire/compat/firestore";
-import { Observable } from "rxjs";
+import { firstValueFrom, Observable } from "rxjs";
+
 
 @Injectable({
   providedIn: 'root'
@@ -31,10 +32,10 @@ export class CrudService {
     })
   }
 
-  getOne(id: string): Observable<Action<DocumentSnapshot<unknown>>> {
-    return this.firestore.collection(this.collection.toString()).doc(id).snapshotChanges()
+  getOne(id: string): Promise<Action<DocumentSnapshot<unknown>>> {
+    return firstValueFrom(this.firestore.collection(this.collection.toString()).doc(id).snapshotChanges())
   }
-
+  
   update(id: string, data: any): Promise<void> {
     return this.firestore.collection(this.collection.toString()).doc(id).set(data)
   }
