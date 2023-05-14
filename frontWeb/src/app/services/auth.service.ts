@@ -10,14 +10,14 @@ import { User, updatePassword , updateEmail} from 'firebase/auth';
 export class AuthService {
   constructor(@Inject(AngularFireAuth) private fireAuth: AngularFireAuth) {}
 
-  async signIn(email: string, senha: string): Promise<firebase.User | null> {
+  async signIn(email: string, senha: string): Promise<boolean> {
     try {
       const { user } = await this.fireAuth.signInWithEmailAndPassword(email, senha);
       console.log("Usuário autenticado com sucesso.", user?.uid);
-      return user;
+      return true;
     } catch (error) {
       console.log("Ocorreu um erro ao autenticar o usuário:", error);
-      return null;
+      return false;
     }
   }
 

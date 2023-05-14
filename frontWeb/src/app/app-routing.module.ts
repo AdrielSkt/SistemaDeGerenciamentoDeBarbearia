@@ -6,8 +6,8 @@ import { LoginComponent } from './components/login/login.component';
 import { RegistrarComponent } from './components/registrar/registrar.component';
 
 const routes: Routes = [
-  {path: 'login', component: LoginComponent},
-  {path: '', component: RegistrarComponent},
+  {path: '', component: LoginComponent},
+  {path: 'registrar', component: RegistrarComponent},
   {path: 'gerencimento', loadChildren: () => import('./gerenciamento/gerenciamento.module').then(x =>x.GerenciamentoModule)}
 ];
 

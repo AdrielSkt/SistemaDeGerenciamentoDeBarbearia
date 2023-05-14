@@ -84,7 +84,7 @@ export class RegistrarComponent implements OnInit {
 }
 
 navegarPara(){
-  this.route.navigateByUrl('login');
+  this.route.navigateByUrl('');
 }
 
 }

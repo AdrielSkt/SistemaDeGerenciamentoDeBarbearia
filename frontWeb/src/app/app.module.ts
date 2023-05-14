@@ -18,19 +18,21 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatGridListModule} from '@angular/material/grid-list';
-import { LoginComponent } from './components/login/login.component';
+import { DialogErrorSenha, LoginComponent } from './components/login/login.component';
 
 import { GerenciamentoModule } from './gerenciamento/gerenciamento.module';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore'
 import { environment } from '../environments/environment';
 import { RegistrarComponent } from './components/registrar/registrar.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegistrarComponent
+    RegistrarComponent,
+    DialogErrorSenha
     
 
 
@@ -61,7 +63,8 @@ import { RegistrarComponent } from './components/registrar/registrar.component';
     MatGridListModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    GerenciamentoModule
+    GerenciamentoModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
