@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavigationCancel, NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 
 
 @Component({
@@ -13,7 +13,6 @@ public rotaAtual!: String;
 constructor(public route: Router){}
 
 ngOnInit() {
-  this.verificaRota();
   this.rotas = [
     {
       nome: 'Menu',
@@ -37,29 +36,30 @@ ngOnInit() {
     }
 
   ];
+  this.verificaRota();
 }
 
 
 
   public acessarRota(rota:String): void{
+    console.log(rota);
     this.route.navigate([rota]);
   }
 
 public verificaRota(): void{
   this.route.events.subscribe((e: any) => {
-    if (e instanceof NavigationEnd) {
-      if(e.url == '/'){
-        this.rotaAtual = 'Menu';
+      if(e.routerEvent.url == '/'){
+        console.log(this.rotaAtual);
       }else{
         this.rotas.forEach((rota)=> {
-          if(rota.rota == e.url){
+          if(rota.rota == e.routerEvent.url){
             this.rotaAtual = rota.nome;
 
           }
         })
       }
+    
 
-    }
   });
 }
 }

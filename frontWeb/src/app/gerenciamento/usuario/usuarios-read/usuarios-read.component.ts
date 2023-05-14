@@ -40,7 +40,7 @@ export class UsuariosReadComponent {
   }
 
   public editarUsuario(id: String) {
-    this.router.navigate(['usuario/edit', id])
+    this.router.navigate(['/usuario/edit', id])
   }
 
   public adicionarUsuario() {
