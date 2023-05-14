@@ -6,6 +6,8 @@ import { Servico } from '../../../models/servicos-model';
 import { Usuario } from '../../../models/usuario-model';
 import { UsuarioService } from 'src/app/services/usuarios.service';
 import { ServicosService } from 'src/app/services/servicos.service';
+import { AuthService } from 'src/app/services/auth.service';
+
 
 @Component({
   selector: 'app-usuario-edit',
@@ -28,15 +30,14 @@ export class UsuarioEditComponent implements OnInit {
      private rotaDeParametro: ActivatedRoute,
      private formBuilder: FormBuilder, 
      private usuarioService: UsuarioService, 
-     private servicosService: ServicosService) {
+     private servicosService: ServicosService,
+     private authService: AuthService) {
 
   }
 
   ngOnInit() {
     this.rotaDeParametro.params.subscribe((obj: any) => this.idDeEdicao = obj.id);
     this.buscaServicos();
-
-    
     this.criaFormulario();
   } 
 
@@ -135,20 +136,21 @@ export class UsuarioEditComponent implements OnInit {
   }
 
 
-  public salvar(): void { 
+   salvar(): void { 
     this.formulario.get('servicos')!.setValue(this.servicosUsuario)
-    let obj = this.formulario.getRawValue()
+    let obj = this.formulario.getRawValue();
+    this.authService.registrar(this.formulario.get('email')?.value,this.formulario.get('senha')?.value)
     this.usuarioService.create(obj);
 }
 
-public atualizar(): void { 
+async atualizar(): Promise<void> { 
   this.formulario.get('servicos')!.setValue(this.servicosUsuario);
   if(this.formulario.get('imagem')?.value! == undefined){  
     this.formulario.get('imagem')!.setValue('');
   }
 
-  let obj = this.formulario.getRawValue()
-  this.usuarioService.update(this.idDeEdicao, obj)
+  let obj = this.formulario.getRawValue();
+  this.usuarioService.update(this.idDeEdicao, obj);
 }
 
 }

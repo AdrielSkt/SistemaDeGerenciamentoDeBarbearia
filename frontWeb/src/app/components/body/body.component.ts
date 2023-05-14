@@ -10,6 +10,7 @@ import { NavigationCancel, NavigationEnd, Router } from '@angular/router';
 export class BodyComponent {
 public rotas!: any[];
 public rotaAtual!: String;
+constructor(public route: Router){}
 
 ngOnInit() {
   this.verificaRota();
@@ -38,7 +39,7 @@ ngOnInit() {
   ];
 }
 
-  constructor(public route: Router){}
+
 
   public acessarRota(rota:String): void{
     this.route.navigate([rota]);

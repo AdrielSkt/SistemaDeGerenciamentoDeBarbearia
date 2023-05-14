@@ -2,10 +2,10 @@ import { Servico } from "./servicos-model";
 
 export interface Usuario {
     id: String,
-    nome: String,
-    email: String,
-    senha: String,
-    sobre: String,
+    nome: string,
+    email: string,
+    senha: string,
+    sobre: string,
     imagem?: Blob,
     servicos: string[],
     admin: boolean,

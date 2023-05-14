@@ -23,6 +23,16 @@ export class CrudService {
     });
   }
 
+  createById(id: string, data: any): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.firestore
+        .collection(this.collection.toString())
+        .doc(id)
+        .set(data)
+        .then(res => resolve(res), err => reject(err));
+    });
+  }
+
   getAll() {
     return new Promise<any>((resolve, reject) => {
       this.firestore.collection(this.collection.toString()).snapshotChanges()

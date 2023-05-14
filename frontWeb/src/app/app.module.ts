@@ -28,6 +28,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore'
 import { environment } from '../environments/environment';
+import { RegistrarComponent } from './components/registrar/registrar.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { environment } from '../environments/environment';
     BodyComponent,
     MenuComponent,
     GerenciamentoDeHorariosComponent,
-    LoginComponent
+    LoginComponent,
+    RegistrarComponent
 
 
 
