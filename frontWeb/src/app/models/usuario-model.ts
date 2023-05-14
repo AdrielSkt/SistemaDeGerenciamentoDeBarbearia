@@ -8,6 +8,7 @@ export interface Usuario {
     sobre: String,
     imagem?: Blob,
     servicos: string[],
+    admin: boolean,
 
 
 

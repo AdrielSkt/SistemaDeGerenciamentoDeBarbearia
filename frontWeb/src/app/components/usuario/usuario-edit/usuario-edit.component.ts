@@ -18,7 +18,7 @@ export class UsuarioEditComponent implements OnInit {
   public hide = true;
   public isChecked: boolean = false;
   public formulario!: FormGroup;
-  public usuarioEdit: Usuario = {id: '', nome: '', email: '', senha: '', sobre: '', servicos: []};
+  public usuarioEdit: Usuario = {id: '', nome: '', email: '', senha: '', sobre: '', servicos: [],admin: false};
   public servicosUsuario: string[] = [];
 
 
@@ -76,7 +76,8 @@ export class UsuarioEditComponent implements OnInit {
       imagem: [''],
       senha: [''],
       servicos: [''],
-      sobre: ['']
+      sobre: [''],
+      admin: [false],
     });
     if (this.idDeEdicao != undefined) {
       this.buscaUsuario();

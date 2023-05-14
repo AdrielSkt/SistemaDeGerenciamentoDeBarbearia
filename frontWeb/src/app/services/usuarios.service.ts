@@ -15,7 +15,7 @@ initializeApp(environment.firebase);
 export class UsuarioService extends CrudService {
 
   constructor() {
-    super('usuarios');
+    super('barbeiros');
   }
 
 }

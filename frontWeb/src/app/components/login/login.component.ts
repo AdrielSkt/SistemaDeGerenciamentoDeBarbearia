@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -27,10 +27,15 @@ export class LoginComponent implements OnInit {
 
 criaFormulario(): void {
   this.formularioLogin = this.formBuilder.group({
-    email: [''],
-    senha: [''],
+    email: ['',Validators.required],
+    senha: ['', Validators.required],
 
   });
+}
+
+
+login(){
+  console.log(this.formularioLogin.getRawValue());
 }
 }
 

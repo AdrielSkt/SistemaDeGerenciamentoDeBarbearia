@@ -31,7 +31,9 @@ export class UsuariosReadComponent {
           id: item.payload.doc.id,
           ...item.payload.doc.data()
         }
-        this.usuarios.push(usuario)
+        if(usuario.admin == false){
+          this.usuarios.push(usuario);
+        }
       })
       this.dataSource = this.usuarios;
     });
