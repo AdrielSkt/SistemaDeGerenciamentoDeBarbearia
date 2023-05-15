@@ -1,24 +1,21 @@
-<body >
-  <div>
-  <mat-toolbar color="primary">
-    <button mat-icon-button (click)="drawer.toggle()">
-      <mat-icon >menu</mat-icon>
+  <body class="container-flot">
+    <mat-toolbar color="primary">
+      <button mat-icon-button (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Barber Shop</span>
+      <span class="spacer">{{ rotaAtual }}</span>
+    </mat-toolbar>
 
-    </button>
-    <span>Barber Shop</span>
-    <span class="spacer">{{rotaAtual}}</span>
-  </mat-toolbar>
-
-
-  <mat-drawer-container class="container" autosize>
-    <mat-drawer #drawer class="sidenav" mode="side">
-
-      <div *ngFor="let rota of rotas" class="menu-list">
-        <button mat-button (click)="acessarRota(rota.rota)"><mat-icon>{{rota.icone}}</mat-icon> {{rota.nome}}</button>
-    </div>
-    </mat-drawer>
-    <router-outlet></router-outlet>
-  </mat-drawer-container>
-</div>
-  <footer></footer>
-</body>
+    <mat-drawer-container class="container" autosize>
+      <mat-drawer #drawer class="sidenav" mode="side">
+        <div *ngFor="let rota of rotas" class="menu-list">
+          <button mat-button (click)="acessarRota(rota.rota)">
+            <mat-icon>{{ rota.icone }}</mat-icon> {{ rota.nome }}
+          </button>
+        </div>
+      </mat-drawer>
+      <router-outlet></router-outlet>
+    </mat-drawer-container>
+    <footer></footer>
+  </body>
