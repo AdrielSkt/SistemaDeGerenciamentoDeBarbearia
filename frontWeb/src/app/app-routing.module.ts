@@ -8,7 +8,8 @@ import { RegistrarComponent } from './components/registrar/registrar.component';
 const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'registrar', component: RegistrarComponent},
-  {path: 'gerencimento', loadChildren: () => import('./gerenciamento/gerenciamento.module').then(x =>x.GerenciamentoModule)}
+  {path: 'gerencimento', loadChildren: () => import('./gerenciamento/gerenciamento.module').then(x =>x.GerenciamentoModule)},
+  
 ];
 
 @NgModule({

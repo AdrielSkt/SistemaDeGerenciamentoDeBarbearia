@@ -16,27 +16,27 @@ ngOnInit() {
   this.rotas = [
     {
       nome: 'Menu',
-      rota: '',
+      rota: 'menu',
       icone: 'home'
     },
     {
       nome:'Gerenciamento de horarios',
-      rota: '/gerenciar-marcacoes',
+      rota: 'gerenciar-marcacoes',
       icone: 'watch_later'
     },
     {
       nome: 'Gerenciamento de usuarios',
-      rota: '/usuario/read',
+      rota: 'usuario/read',
       icone: 'people_alt'
     },
     {
       nome:'Gerenciamento de serviços',
-      rota: '',
+      rota: 'menu',
       icone: 'content_cut'
     }
 
   ];
-  this.verificaRota();
+  // this.verificaRota();
 }
 
 
@@ -46,20 +46,21 @@ ngOnInit() {
     this.route.navigate([rota]);
   }
 
-public verificaRota(): void{
-  this.route.events.subscribe((e: any) => {
-      if(e.routerEvent.url == '/'){
-        console.log(this.rotaAtual);
-      }else{
-        this.rotas.forEach((rota)=> {
-          if(rota.rota == e.routerEvent.url){
-            this.rotaAtual = rota.nome;
+// public verificaRota(): void{
+//   this.route.events.subscribe((e: any) => {
+//     console.log(e.routerEvent.url)
+//       if(e.routerEvent.url == '/'){
+//         this.rotaAtual = 'menu';
+//       }else{
+//         this.rotas.forEach((rota)=> {
+//           if(rota.rota == e.routerEvent.url){
+//             this.rotaAtual = rota.nome;
 
-          }
-        })
-      }
+//           }
+//         })
+//       }
     
 
-  });
-}
+//   });
+// }
 }

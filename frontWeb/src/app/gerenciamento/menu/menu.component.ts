@@ -20,28 +20,32 @@ ngOnInit() {
       imagem: "assets/horario.png",
       titulo: "Gerenciamento de Horarios",
       descricao: 'Gerencie as solicitações e os horarios marcados',
-      rota: '/gerenciar-marcacoes'
+      rota: 'gerenciar-marcacoes'
 
     },
     {
       imagem: "assets/usuario.png",
       titulo: "Gerenciamento de Usuarios",
       descricao: "Gerencie os barbeiros cadastrados no sistema",
-      rota: '/usuario/read'
+      rota: 'usuario/read'
 
     },
     {
       imagem: "assets/servicos.jpeg",
       titulo: "Gerenciamento de Serviços",
       descricao: "Gerencie os serviços prestados pelos barbeiros",
-      rota: '/menu'
+      rota: 'menu'
 
     }
   ];
 }
 
 public acessarRota(rota: String): void{
-  this.route.navigate([rota]);
+  console.log(rota);
+  if(rota != undefined){
+    this.route.navigate([rota]);
+  }
+
 }
 
 
