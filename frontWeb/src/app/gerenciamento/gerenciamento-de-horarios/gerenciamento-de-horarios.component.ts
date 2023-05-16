@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import { ActivatedRoute } from '@angular/router';
 import {default as _rollupMoment} from 'moment';
 import { FormularioMarcacao } from 'src/app/models/formulario-marcacao-model';
 import { Servico } from 'src/app/models/servicos-model';
@@ -44,27 +45,32 @@ export class GerenciamentoDeHorariosComponent implements OnInit{
   public servicos: Servico[] = [];
   public servico: Servico = {id: '', nome: '', imagem: '', valor: 0}
   public marcacoes: FormularioMarcacao[] = [];
-  
+  public userId: string;
   
   displayedColumns: string[] = [ 'nome','horario','servicos','valor','ações'];
   dataSource: FormularioMarcacao[];
 
-  constructor(private gerenciamentoHorariosService: GerenciamentoHorariosService, private servicosService: ServicosService){}
+  constructor(
+    private gerenciamentoHorariosService: GerenciamentoHorariosService, 
+    private servicosService: ServicosService,
+    private rotaDeParametro: ActivatedRoute){}
 
 
   ngOnInit(): void {
-    console.log(this.marcacoes);
+    this.rotaDeParametro.params.subscribe((obj: any) => this.userId = obj.id);
     this.filtraListaPorData();
-    this.buscarHorariosMarcados();
+    this.filtraListaPorData();
   }
 
   filtraListaPorData(): void{
     let dataFormatada = new Date(this.startDate);
     this.diaAtual = this.diasSemana[dataFormatada.getDay()];
-      console.log(dataFormatada.toLocaleDateString("pt-BR").replace(/\//g, '-'))
+    this.marcacoes = [];
+    this.buscarHorariosMarcados(dataFormatada.toLocaleDateString("pt-BR").replace(/\//g, '-'));
+
   }
 
- async buscarHorariosMarcados(){
+ async buscarHorariosMarcados(data: string){
     this.gerenciamentoHorariosService.getAll().then( async result => {
       for (const item of result) {
         const formulario: FormularioMarcacao = {
@@ -73,10 +79,17 @@ export class GerenciamentoDeHorariosComponent implements OnInit{
         }
         formulario.servicos = await Promise.all(formulario.servicos.map(async servico =>{ // <-- adicionar async aqui e usar Promise.all para aguardar todas as chamadas de função
           await this.buscarServico(servico);
-          console.log(this.servico);
           return this.servico.nome;
         }));
-        this.marcacoes.push(formulario);
+        if(formulario.idBarbeiro == this.userId){
+          if(formulario.data == data){
+            console.log(formulario.data);
+            this.marcacoes.push(formulario);
+          }else if(data == ''){
+            this.marcacoes.push(formulario);
+          }
+        }
+
       }
       this.dataSource = this.marcacoes;
     });

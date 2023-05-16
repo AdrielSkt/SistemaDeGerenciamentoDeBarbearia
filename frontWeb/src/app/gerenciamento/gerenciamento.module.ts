@@ -18,6 +18,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { UsuarioEditComponent } from './usuario-edit/usuario-edit.component';
 
 
 
@@ -28,6 +29,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     BodyComponent,
     MenuComponent,
     GerenciamentoDeHorariosComponent,
+    UsuarioEditComponent
 
   ],
   imports: [

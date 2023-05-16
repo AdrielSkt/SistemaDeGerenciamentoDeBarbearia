@@ -3,6 +3,7 @@ import { AngularFireAuth} from "@angular/fire/compat/auth";
 import firebase from 'firebase/compat/app';
 import { Observable } from "rxjs";
 import { User, updatePassword , updateEmail} from 'firebase/auth';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -46,43 +47,15 @@ export class AuthService {
     }
   }
 
+  getCurrentUserId(): Observable<string | undefined> {
+    return this.fireAuth.user.pipe(
+      map(user => user ? user.uid : undefined)
+    );
+  }
+
   getCurrentUser(): Observable<any> {
     return this.fireAuth.user;
   }
-
-
-
-  async alterarCredenciaisLogin(emailAdm: string, senhaAdm: string, emailOldUser: string, senhaOldUser: string, newEmailUser: string, newSenhaUser: string){
-   console.log(emailAdm, senhaAdm, emailOldUser, senhaOldUser, newEmailUser, newSenhaUser);
-
-    const loginsAlteracao = [{
-      email: emailAdm,
-      senha: senhaAdm
-    },
-    {
-      email: emailOldUser,
-      senha: senhaOldUser
-    }];
-    console.log(this.getCurrentUser());
-    await this.signOut();
-    await this.signIn(loginsAlteracao[1].email,loginsAlteracao[1].senha);
-    
-    await this.alteraEmail(newEmailUser);
-    await this.signOut();
-    console.log("POS MAIL");
-    await this.signIn(newEmailUser,loginsAlteracao[0].senha);
-    await  this.alteraPassword(newSenhaUser);
-
-    await this.signOut();
-    await this.signIn(loginsAlteracao[0].email,loginsAlteracao[0].senha);
-    
-
-      
-  }
-
-
-
-
 
   private async alteraEmail(email: string): Promise<boolean> {
     await this.fireAuth.user.subscribe(user => {

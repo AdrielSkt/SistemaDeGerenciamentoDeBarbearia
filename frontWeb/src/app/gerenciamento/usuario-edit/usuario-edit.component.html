@@ -1,5 +1,5 @@
 <div class="title-div">
-  <button mat-mini-fab color="primary" routerLink="/usuario/read">
+  <button mat-mini-fab color="primary" routerLink="menu">
     <mat-icon>arrow_back</mat-icon>
   </button>
   Editar Usuario
@@ -48,14 +48,9 @@
 </mat-card>
 </form>
 
-<div class="save-button" *ngIf="idDeEdicao == undefined">
-  <button class="addButton" mat-raised-button color="primary" (click)="salvar()" routerLink="/usuario/read">
-    <mat-icon>save</mat-icon> Salvar
-  </button>
-</div>
 
 <div class="save-button" *ngIf="idDeEdicao != undefined">
-  <button class="addButton" mat-raised-button color="primary" (click)="atualizar()" routerLink="/usuario/read">
+  <button class="addButton" mat-raised-button color="primary" (click)="atualizar()" routerLink="menu">
     <mat-icon>save</mat-icon> Atualizar
   </button>
 </div>

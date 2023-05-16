@@ -2,8 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { ActivatedRoute } from '@angular/router';
-import { Servico } from '../../../models/servicos-model';
-import { Usuario } from '../../../models/usuario-model';
+import { Servico } from '../../models/servicos-model';
+import { Usuario } from '../../models/usuario-model';
 import { UsuarioService } from 'src/app/services/usuarios.service';
 import { ServicosService } from 'src/app/services/servicos.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -37,8 +37,8 @@ export class UsuarioEditComponent implements OnInit {
 
   ngOnInit() {
     this.rotaDeParametro.params.subscribe((obj: any) => this.idDeEdicao = obj.id);
-    this.buscaServicos();
-    this.criaFormulario();
+      this.buscaServicos();
+      this.criaFormulario();
   } 
 
   buscaUsuario(): void {

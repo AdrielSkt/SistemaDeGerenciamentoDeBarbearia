@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 @Component({
@@ -9,10 +10,17 @@ import { NavigationEnd, Router } from '@angular/router';
 })
 export class BodyComponent {
 public rotas!: any[];
-public rotaAtual!: String;
-constructor(public route: Router){}
+public userId: string;
+
+constructor(public route: Router, private authService: AuthService){}
 
 ngOnInit() {
+  this.authService.getCurrentUserId().subscribe((id)=>{
+    if(id)
+    this.userId = id; 
+  });
+
+
   this.rotas = [
     {
       nome: 'Menu',
@@ -26,7 +34,7 @@ ngOnInit() {
     },
     {
       nome: 'Gerenciamento de usuarios',
-      rota: 'usuario/read',
+      rota: 'usuario',
       icone: 'people_alt'
     },
     {
@@ -36,31 +44,23 @@ ngOnInit() {
     }
 
   ];
-  // this.verificaRota();
+
 }
 
 
 
-  public acessarRota(rota:String): void{
-    console.log(rota);
-    this.route.navigate([rota]);
+public acessarRota(rota: String): void{
+  console.log(rota);
+  if(rota != undefined){
+    if(rota == 'usuario'){
+      this.route.navigate([rota, this.userId]);
+    }else{
+      this.route.navigate([rota]);
+    }
+    
   }
 
-// public verificaRota(): void{
-//   this.route.events.subscribe((e: any) => {
-//     console.log(e.routerEvent.url)
-//       if(e.routerEvent.url == '/'){
-//         this.rotaAtual = 'menu';
-//       }else{
-//         this.rotas.forEach((rota)=> {
-//           if(rota.rota == e.routerEvent.url){
-//             this.rotaAtual = rota.nome;
+}
 
-//           }
-//         })
-//       }
-    
 
-//   });
-// }
 }
