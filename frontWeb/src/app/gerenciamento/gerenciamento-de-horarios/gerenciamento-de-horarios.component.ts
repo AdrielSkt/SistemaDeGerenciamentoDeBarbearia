@@ -59,7 +59,6 @@ export class GerenciamentoDeHorariosComponent implements OnInit{
   ngOnInit(): void {
     this.rotaDeParametro.params.subscribe((obj: any) => this.userId = obj.id);
     this.filtraListaPorData();
-    this.filtraListaPorData();
   }
 
   filtraListaPorData(): void{
