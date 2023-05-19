@@ -1,57 +1,65 @@
-<div class="title-div">
-  <button mat-mini-fab color="primary" routerLink="menu">
-    <mat-icon>arrow_back</mat-icon>
-  </button>
-  Marcações
-</div>
-<div>
-  <mat-form-field appearance="outline">
-    <mat-label>Data do filtro</mat-label>  
-    <div>
-    <input style="color: #C0C0C0;" matInput [matDatepicker]="dp" [(ngModel)]="startDate" (dateChange)="filtraListaPorData() ">
-    <p>{{diaAtual}}</p>
+<div class="content">
+  <div class="title-div">
+    <button mat-mini-fab color="primary" routerLink="menu">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 style="margin:0;">Marcações</h1>
   </div>
-    <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
-    <mat-datepicker #dp></mat-datepicker>
-  </mat-form-field>
-</div>
+  
+  <div class="calendar">
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Data do filtro</mat-label>
+        <div class="data">
+          <input style="color: #C0C0C0;" matInput [matDatepicker]="dp" [(ngModel)]="startDate"
+            (dateChange)="filtraListaPorData() ">
+          <p style="margin: 0;">{{diaAtual}}</p>
+        </div>
+        <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
+        <mat-datepicker #dp></mat-datepicker>
+      </mat-form-field> 
+    </div>
+
+  </div>
 
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" class="table" >
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" class="table">
 
 
-    <ng-container matColumnDef="nome" >
+    <ng-container matColumnDef="nome">
       <th mat-header-cell *matHeaderCellDef> NOME</th>
       <td mat-cell *matCellDef="let element"> {{element.nomeCliente}} </td>
     </ng-container>
-    <ng-container matColumnDef="horario" >
+    <ng-container matColumnDef="horario">
       <th mat-header-cell *matHeaderCellDef> HORARIO</th>
       <td mat-cell *matCellDef="let element"> {{element.hora}} hrs </td>
     </ng-container>
-    <ng-container matColumnDef="servicos" >
+    <ng-container matColumnDef="servicos">
       <th mat-header-cell *matHeaderCellDef> SERVIÇOS</th>
-      <td mat-cell *matCellDef="let element"> 
+      <td mat-cell *matCellDef="let element">
         <div class="servicos">
-          <p *ngFor="let servico of element.servicos">{{servico}}</p></div>
+          <p *ngFor="let servico of element.servicos">{{servico}}</p>
+        </div>
       </td>
     </ng-container>
-    <ng-container matColumnDef="valor" >
+    <ng-container matColumnDef="valor">
       <th mat-header-cell *matHeaderCellDef> VALOR</th>
       <td mat-cell *matCellDef="let element"> {{element.valor| currency : 'BRL'}} </td>
     </ng-container>
-  
+
 
     <!-- Symbol Column -->
-    <ng-container matColumnDef="ações" >  
+    <ng-container matColumnDef="ações">
       <th mat-header-cell *matHeaderCellDef> AÇÕES </th>
-      <td mat-cell *matCellDef="let element"class="actions"> 
-      <div class="action-buttons" >
-        <button  mat-mini-fab color="warn"><mat-icon>restore_from_trash</mat-icon> </button>
-      </div>
+      <td mat-cell *matCellDef="let element" class="actions">
+        <div class="action-buttons">
+          <button mat-mini-fab color="warn"><mat-icon>restore_from_trash</mat-icon> </button>
+        </div>
       </td>
     </ng-container>
-  
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
+</div>

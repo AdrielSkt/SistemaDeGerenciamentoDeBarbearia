@@ -20,45 +20,45 @@ export class UsuarioEditComponent implements OnInit {
   public hide = true;
   public isChecked: boolean = false;
   public formulario!: FormGroup;
-  public usuarioEdit: Usuario = {id: '', nome: '', email: '', senha: '', sobre: '', servicos: [],admin: false};
+  public usuarioEdit: Usuario = { id: '', nome: '', email: '', senha: '', sobre: '', servicos: [], admin: false };
   public servicosUsuario: string[] = [];
 
 
   public servicos: Servico[] = [];
 
   constructor(
-     private rotaDeParametro: ActivatedRoute,
-     private formBuilder: FormBuilder, 
-     private usuarioService: UsuarioService, 
-     private servicosService: ServicosService,
-     private authService: AuthService) {
+    private rotaDeParametro: ActivatedRoute,
+    private formBuilder: FormBuilder,
+    private usuarioService: UsuarioService,
+    private servicosService: ServicosService,
+    private authService: AuthService) {
 
   }
 
   ngOnInit() {
     this.rotaDeParametro.params.subscribe((obj: any) => this.idDeEdicao = obj.id);
-      this.buscaServicos();
-      this.criaFormulario();
-  } 
+    this.buscaServicos();
+    this.criaFormulario();
+  }
 
   buscaUsuario(): void {
-        this.usuarioService.getOne(this.idDeEdicao).then(result => {
-          const data = result.payload.data() as Usuario;
-          if (data) {
-            this.usuarioEdit.id = result.payload.id;
-            this.usuarioEdit.nome = data.nome;
-            this.usuarioEdit.email = data.email;
-            this.usuarioEdit.senha = data.senha;
-            this.usuarioEdit.sobre = data.sobre;
-            this.usuarioEdit.servicos = data.servicos;
-            this.preecheFormulario();
+    this.usuarioService.getOne(this.idDeEdicao).then(result => {
+      const data = result.payload.data() as Usuario;
+      if (data) {
+        this.usuarioEdit.id = result.payload.id;
+        this.usuarioEdit.nome = data.nome;
+        this.usuarioEdit.email = data.email;
+        this.usuarioEdit.senha = data.senha;
+        this.usuarioEdit.sobre = data.sobre;
+        this.usuarioEdit.servicos = data.servicos;
+        this.preecheFormulario();
 
-          }
-        });
+      }
+    });
   }
 
 
-  buscaServicos(): void{
+  buscaServicos(): void {
     this.servicosService.getAll().then(result => {
       result.forEach((item: any) => {
         const servico: Servico = {
@@ -83,7 +83,7 @@ export class UsuarioEditComponent implements OnInit {
     if (this.idDeEdicao != undefined) {
       this.buscaUsuario();
 
-      
+
     }
   }
 
@@ -122,8 +122,6 @@ export class UsuarioEditComponent implements OnInit {
 
 
 
-
-
   atualizaListaServicos(servico: Servico, event: MatSlideToggleChange): void {
     this.isChecked = event.checked;
     if (this.isChecked == true) {
@@ -132,27 +130,22 @@ export class UsuarioEditComponent implements OnInit {
     if (this.isChecked == false) {
       this.servicosUsuario = this.servicosUsuario.filter(e => e != servico.id);
     }
-    console.log(this.servicosUsuario);
   }
 
+  async atualizar(): Promise<void> {
+    let updateCredentials: boolean = false;
 
-   salvar(): void { 
-    this.formulario.get('servicos')!.setValue(this.servicosUsuario)
+    this.formulario.get('servicos')!.setValue(this.servicosUsuario);
+    if (this.formulario.get('imagem')?.value! == undefined) {
+      this.formulario.get('imagem')!.setValue('');
+    }
+
+
+    updateCredentials = await this.authService.atualizarCredenciais(this.formulario.get('email')?.value, this.formulario.get('senha')?.value);
+   if(updateCredentials){
     let obj = this.formulario.getRawValue();
-    this.authService.registrar(this.formulario.get('email')?.value,this.formulario.get('senha')?.value)
-    this.usuarioService.create(obj);
-}
-
-async atualizar(): Promise<void> { 
-  this.formulario.get('servicos')!.setValue(this.servicosUsuario);
-  if(this.formulario.get('imagem')?.value! == undefined){  
-    this.formulario.get('imagem')!.setValue('');
+    this.usuarioService.update(this.idDeEdicao, obj);
+   }
   }
-
-  let obj = this.formulario.getRawValue();
-  this.usuarioService.update(this.idDeEdicao, obj);
 }
-
-}
-
 

@@ -1,15 +1,15 @@
 import { Inject, Injectable } from "@angular/core";
-import { AngularFireAuth} from "@angular/fire/compat/auth";
+import { AngularFireAuth } from "@angular/fire/compat/auth";
 import firebase from 'firebase/compat/app';
 import { Observable } from "rxjs";
-import { User, updatePassword , updateEmail} from 'firebase/auth';
+import { User, updatePassword, updateEmail } from 'firebase/auth';
 import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(@Inject(AngularFireAuth) private fireAuth: AngularFireAuth) {}
+  constructor(@Inject(AngularFireAuth) private fireAuth: AngularFireAuth) { }
 
   async signIn(email: string, senha: string): Promise<boolean> {
     try {
@@ -57,33 +57,24 @@ export class AuthService {
     return this.fireAuth.user;
   }
 
-  private async alteraEmail(email: string): Promise<boolean> {
-    await this.fireAuth.user.subscribe(user => {
-      if (user) {
-        updateEmail(user, email).then(() => {
-          console.log('Email atualizada com sucesso!');
-          return true;
-        }).catch(error => {
-          console.log('Ocorreu um erro ao atualizar o email:', error);
-          return false;
-        });
-      }
-    });
-    return false;
-  }
 
-  private async alteraPassword(password: string): Promise<boolean> {
-    await this.fireAuth.user.subscribe(user => {
+
+  async atualizarCredenciais(email: string, senha: string): Promise<boolean> {
+    try {
+      const user = await this.fireAuth.currentUser;
       if (user) {
-        updatePassword(user, password).then(() => {
-          console.log('Senha atualizada com sucesso!');
-          return true;
-        }).catch(error => {
-          console.log('Ocorreu um erro ao atualizar a senha:', error);
-          return false;
-        });
+        await user.updateEmail(email);
+        await user.updatePassword(senha);
+        console.log('Credenciais atualizadas com sucesso!');
+        return true;
+      } else {
+        console.log('Usuário não está autenticado.');
+        return false;
       }
-    });
-    return false;
+    } catch (error) {
+      console.log('Ocorreu um erro ao atualizar as credenciais:', error);
+      return false;
+    }
   }
+  
 }

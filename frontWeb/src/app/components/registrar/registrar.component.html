@@ -1,58 +1,54 @@
+<form class="conteiner" [formGroup]="formulario">
 
-
-<div class="title-div">
-  <button mat-mini-fab color="primary" (click)="navegarPara()">
-    <mat-icon>arrow_back</mat-icon>
-  </button>
-  REGISTRE-SE
-</div>
-<mat-progress-bar mode="indeterminate"></mat-progress-bar>
-<div class="contentRegistro">
-
-<form class="content" [formGroup]="formulario">
-  <mat-card class="formulario">
-    <p id="texto">
-        <mat-form-field appearance="fill">
-          <mat-label>Nome</mat-label>
-          <input matInput placeholder="Escreva seu nome" formControlName="nome">
-          <mat-icon matSuffix>view_timeline</mat-icon>
-        </mat-form-field>
-
-        <mat-form-field appearance="fill">
-          <mat-label>E-mail</mat-label>
-          <input matInput placeholder="Escreva seu e-mail" formControlName="email">
-          <mat-icon matSuffix>markunread</mat-icon>
-        </mat-form-field>
-
-        <mat-form-field  appearance="fill">
-          <mat-label>Senha </mat-label>
-          <input  matInput [type]="hide ? 'password' : 'text'" placeholder="Escreva sua senha" formControlName="senha">
-          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-          </button>
-        </mat-form-field>
-
-      <mat-form-field appearance="fill">
-        <mat-label>Sobre</mat-label>
-        <textarea matInput formControlName="sobre"></textarea>
-      </mat-form-field>
-      </p>
-
-      
+  <div class="header">
+    <button mat-mini-fab color="primary" (click)="navegarPara()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="titulo">REGISTRE-SE</h1>
     
-</mat-card>
-<mat-card class="listaServicos">
-  <h1 style="margin-bottom: inherit;">SERVIÇOS</h1>
-  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-  <p class="servico" *ngFor="let servico of servicos">
-  <mat-slide-toggle color="primary" (change)="atualizaListaServicos(servico, $event)" ></mat-slide-toggle>{{servico.nome}}
-  </p>
-</mat-card>
-</form>
+  </div>
+  <div class="content">
+  <div class="formulario">
+    <mat-form-field appearance="fill">
+      <mat-label>Nome</mat-label>
+      <input matInput placeholder="Escreva seu nome" formControlName="nome">
+      <mat-icon matSuffix>view_timeline</mat-icon>
+    </mat-form-field>
 
-<div class="save-button" >
+    <mat-form-field appearance="fill">
+      <mat-label>E-mail</mat-label>
+      <input matInput placeholder="Escreva seu e-mail" formControlName="email">
+      <mat-icon matSuffix>markunread</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Senha </mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" placeholder="Escreva sua senha" formControlName="senha">
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Sobre</mat-label>
+      <textarea style="height: 5rem;" matInput formControlName="sobre"></textarea>
+    </mat-form-field>
+  </div>
+
+  <div class="serviceList">
+    <h1>SERVIÇOS</h1>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    <div class="servico">
+      <mat-slide-toggle *ngFor="let servico of servicos" color="primary"
+        (change)="atualizaListaServicos(servico, $event)"><label style="color: aliceblue;">{{servico.nome}}</label></mat-slide-toggle>
+    </div>
+  </div>
   <button class="addButton" mat-raised-button color="primary" (click)="salvar()" routerLink="">
     <mat-icon>save</mat-icon> Salvar
   </button>
 </div>
-</div>
+  <div class="buttons">
+
+  </div>
+</form>
