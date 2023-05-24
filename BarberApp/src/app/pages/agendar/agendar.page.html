@@ -1,0 +1,85 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary" class="barraSuperior">
+    <ion-avatar slot="end">
+      <img src="../../../assets/logoTo.png" />
+    </ion-avatar>
+    <ion-title mode="md" class="ion-no-padding" color="tertiary">
+      <ion-label>
+        <ion-text>Bem vindo</ion-text>
+        <p><ion-text><strong>Adriel</strong></ion-text></p>
+      </ion-label>
+    </ion-title>
+  </ion-toolbar>
+  <ion-card class="cardInfo">
+    <ion-card-content> Escolha teu barbeiro </ion-card-content>
+  </ion-card>
+</ion-header>
+
+
+
+<ion-content [fullscreen]="true">
+  <div *ngIf="!selectBarbeiro">
+  <ion-slides #swiper 
+  class="banners" 
+  (ionSlideDidChange)="UserChange()"
+  [pager]="true" 
+  [options]="sliderBarberOptions">
+  <ion-slide *ngFor="let barbeiro of barbeiros">
+    <div align="center">
+      <ion-label>
+        <span><strong>{{barbeiro.nome}}</strong></span>
+        <div class="BarberAvatar">
+          <ion-avatar>
+            <ion-img src="../../../assets/horariosMarcados.jpg"></ion-img>
+          </ion-avatar>
+        </div>
+        <span>{{barbeiro.sobre}}</span>
+      </ion-label>
+    </div>
+  </ion-slide>
+</ion-slides>
+  
+  <ion-slides [pager]="true" [options]="sliderServiceOptions">
+    <ion-slide class="listaServicos" *ngFor="let servico of servicosUser">
+      <ion-card color="primary">
+        <ion-card-subtitle>{{servico.nome}}</ion-card-subtitle>
+        <ion-img src="../../../assets/marcarHorario.jpg"></ion-img>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+
+  <div class="button">
+    <ion-button (click)="escolheBarbeiro()">
+      <ion-icon name="checkmark-circle-outline"></ion-icon>
+      Escolher Barbeiro
+    </ion-button>
+  </div>
+
+</div>
+
+<div *ngIf="selectBarbeiro">
+  <ion-list lines="none">
+    <ion-item *ngFor="let servico of servicosUser">
+      <ion-fab >
+        <ion-fab-button size="small">
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list side="end">
+          <ion-fab-button>
+            <ion-icon name="document"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button>
+            <ion-icon name="color-palette"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button>
+            <ion-icon name="globe"></ion-icon>
+          </ion-fab-button>
+        </ion-fab-list>
+      </ion-fab>
+    </ion-item>
+  </ion-list>   
+</div>
+
+</ion-content>
+
+
