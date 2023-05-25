@@ -122,10 +122,13 @@ export class AgendarPage implements OnInit {
     });
 
   }
-
-
   escolheBarbeiro(){
     this.selectBarbeiro = true;
+  }
+
+  //SELECAO DE SERVICOS
+  voltarParabarbeiros(){
+    this.selectBarbeiro = false;
   }
 
 }
