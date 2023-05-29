@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { IonSlides, LoadingController } from '@ionic/angular';
 import { Barbeiro } from 'src/app/models/barbeiro-model';
 import { Servico } from 'src/app/models/servicos-model';
+import { ServicoSelect } from 'src/app/models/servicos-user-select';
 import { BarbeirosService } from 'src/app/service/barbeiros.service';
 import { ServicosService } from 'src/app/service/servicos.service';
 
@@ -47,12 +48,14 @@ export class AgendarPage implements OnInit {
 
   barbeiros: Barbeiro[] = [];
   allServicos: Servico[] = [];
-  servicosUser: Servico[] = []; 
+  servicosUser: ServicoSelect[] = []; 
   selectBarbeiro: boolean = false;
+  valorFinal: number = 0;
   constructor(private servicosService: ServicosService, private barbeirosService: BarbeirosService) { }
 
 
   ngOnInit() {
+
     this.selectBarbeiro = false;
     this.obterServicos();
     this. obtemBarbeiros();
@@ -116,7 +119,13 @@ export class AgendarPage implements OnInit {
   addServicesUser(id: string){
     this.allServicos.forEach((servico)=>{
       if(servico.id == id){
-        this.servicosUser.push(servico);
+        let servicoSelect: ServicoSelect = {
+          id: servico.id,
+          nome: servico.nome,
+          valor: servico.valor,
+          selecao: false,
+        }
+        this.servicosUser.push(servicoSelect);
       }
       
     });
@@ -128,7 +137,26 @@ export class AgendarPage implements OnInit {
 
   //SELECAO DE SERVICOS
   voltarParabarbeiros(){
+    this.barbeiros = [];
+    this.allServicos = [];
     this.selectBarbeiro = false;
+    this.obterServicos();
+    this. obtemBarbeiros();
+    this.valorFinal = 0;
+  }
+
+  activated(selecao: ServicoSelect){
+    const index = this.servicosUser.findIndex(servico=> selecao.id == servico.id);
+    if(selecao.selecao == true){
+      this.servicosUser[index].selecao = false;
+      this.valorFinal -= selecao.valor;
+
+    }else if(selecao.selecao == false){
+      this.servicosUser[index].selecao = true;
+      this.valorFinal = +this.valorFinal + +selecao.valor;
+    }
+    
+
   }
 
 }

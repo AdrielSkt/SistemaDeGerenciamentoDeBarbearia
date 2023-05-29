@@ -64,24 +64,27 @@
         <div class="selectServiceList">
           <p>{{servico.nome}}</p>
           <ion-fab style="position: relative;">
-            <ion-fab-button size="small">
-              <ion-img src="../../../assets/Servicos.jpg"></ion-img>
+            <ion-fab-button size="small" (click)="activated(servico)">
+                <ion-img src="../../../assets/tesouraPente.png"></ion-img>
             </ion-fab-button>
-            <ion-fab-list side="end">
+            <ion-fab-list side="end" >
               <ion-fab-button>
-                <ion-icon name="document"></ion-icon>
+                Valor
               </ion-fab-button>
               <ion-fab-button>
-                <ion-icon name="color-palette"></ion-icon>
-              </ion-fab-button>
-              <ion-fab-button>
-                <ion-icon name="globe"></ion-icon>
+                {{servico.valor}}
               </ion-fab-button>
             </ion-fab-list>
           </ion-fab>
         </div>
       </ion-item>
     </ion-list>
+
+    <div class="button">
+      <ion-button>
+        {{valorFinal| currency : 'BRL'}}
+      </ion-button>
+    </div>
   </div>
 
 </ion-content>
