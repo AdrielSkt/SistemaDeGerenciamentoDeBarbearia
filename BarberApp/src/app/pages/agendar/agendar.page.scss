@@ -45,6 +45,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    margin-bottom: 20%;
     
     ion-button{
       width: 50%;
@@ -112,8 +116,16 @@ ion-content {
       }
     }
 
-
+//SELECAO DE SERVICOS
     .selectServiceList{
       display: flex;
       align-items: center;
+      
     }
+// SELECAO DE HORARIOS
+
+.selecaoHorarios{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}

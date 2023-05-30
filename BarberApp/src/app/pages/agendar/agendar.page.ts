@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { IonSlides, LoadingController } from '@ionic/angular';
 import { Barbeiro } from 'src/app/models/barbeiro-model';
+import { FormularioMarcacao } from 'src/app/models/formulario-marcacao-model';
 import { Servico } from 'src/app/models/servicos-model';
 import { ServicoSelect } from 'src/app/models/servicos-user-select';
 import { BarbeirosService } from 'src/app/service/barbeiros.service';
@@ -44,27 +45,41 @@ export class AgendarPage implements OnInit {
     }
 
   };
-
-
+  formulario: FormularioMarcacao = {
+    id: '',
+    nomeCliente: '',
+    idBarbeiro: '',
+    data: '',
+    hora: '',
+    servicos: [],
+    valor: 0
+  }
+  //Header
+  chatText: string = 'Escolha teu barbeiro';
+  //Selecao de barbeiros
   barbeiros: Barbeiro[] = [];
   allServicos: Servico[] = [];
-  servicosUser: ServicoSelect[] = []; 
+  servicosUser: ServicoSelect[] = [];
+  //Selecao de servicos
   selectBarbeiro: boolean = false;
   valorFinal: number = 0;
+  barberSelectedName: string = '';
+  // selecao de horarios
+  selectHorario: boolean = false;
   constructor(private servicosService: ServicosService, private barbeirosService: BarbeirosService) { }
 
 
   ngOnInit() {
-
+    this.selectHorario = false;
     this.selectBarbeiro = false;
     this.obterServicos();
-    this. obtemBarbeiros();
- 
-    
+    this.obtemBarbeiros();
+
+
 
   }
-  
-  obtemBarbeiros(){
+
+  obtemBarbeiros() {
     this.barbeirosService.getAll().subscribe((result) => {
       result.forEach((item: any) => {
         const barbeiro: Barbeiro = {
@@ -80,7 +95,7 @@ export class AgendarPage implements OnInit {
         this.barbeiros.push(barbeiro);
       }
       );
-      this.UserChange();
+      this.barberChange();
     });
   }
 
@@ -99,26 +114,30 @@ export class AgendarPage implements OnInit {
 
   }
 
-  UserChange() {
+  barberChange() {
     if (this.swiper) {
       this.swiper.getActiveIndex().then(activeIndex => {
         this.servicosUser = [];
-        this.barbeiros[activeIndex].servicos.forEach((servicoId)=>{
+        this.barberSelectedName = this.barbeiros[activeIndex].nome;
+        this.formulario.idBarbeiro = this.barbeiros[activeIndex].id;
+        this.barbeiros[activeIndex].servicos.forEach((servicoId) => {
           this.addServicesUser(servicoId);
         });
-        
+
       });
-      
-    }else{
-      this.barbeiros[0].servicos.forEach((servicoId)=>{
+
+    } else {
+      this.formulario.idBarbeiro = this.barbeiros[0].id;
+      this.barberSelectedName = this.barbeiros[0].nome;
+      this.barbeiros[0].servicos.forEach((servicoId) => {
         this.addServicesUser(servicoId);
       });
     }
   }
 
-  addServicesUser(id: string){
-    this.allServicos.forEach((servico)=>{
-      if(servico.id == id){
+  addServicesUser(id: string) {
+    this.allServicos.forEach((servico) => {
+      if (servico.id == id) {
         let servicoSelect: ServicoSelect = {
           id: servico.id,
           nome: servico.nome,
@@ -127,37 +146,52 @@ export class AgendarPage implements OnInit {
         }
         this.servicosUser.push(servicoSelect);
       }
-      
+
     });
 
   }
-  escolheBarbeiro(){
+  escolheBarbeiro() {
+    this.chatText = 'Selecione os serviços desejados!!'
     this.selectBarbeiro = true;
   }
 
   //SELECAO DE SERVICOS
-  voltarParabarbeiros(){
+  voltarParabarbeiros() {
     this.barbeiros = [];
     this.allServicos = [];
-    this.selectBarbeiro = false;
     this.obterServicos();
-    this. obtemBarbeiros();
+    this.obtemBarbeiros();
+    this.selectBarbeiro = false;
+    this.formulario.servicos = [];
     this.valorFinal = 0;
+    this.chatText = 'Escolha teu barbeiro';
   }
 
-  activated(selecao: ServicoSelect){
-    const index = this.servicosUser.findIndex(servico=> selecao.id == servico.id);
-    if(selecao.selecao == true){
+  selecaoDeServico(selecao: ServicoSelect) {
+    const index = this.servicosUser.findIndex(servico => selecao.id == servico.id);
+    if (selecao.selecao == true) {
       this.servicosUser[index].selecao = false;
       this.valorFinal -= selecao.valor;
+      this.formulario.servicos = this.formulario.servicos.filter(id => id != selecao.id);
 
-    }else if(selecao.selecao == false){
+    } else if (selecao.selecao == false) {
       this.servicosUser[index].selecao = true;
       this.valorFinal = +this.valorFinal + +selecao.valor;
+      this.formulario.servicos.push(selecao.id);
     }
-    
 
   }
+
+  confirmarServicos() {
+    this.formulario.valor = this.valorFinal;
+    this.selectHorario = true;
+    this.selectBarbeiro = false;
+    console.log(this.formulario)
+  }
+
+  //SELECAO DE HORARIOS
+
+
 
 }
 

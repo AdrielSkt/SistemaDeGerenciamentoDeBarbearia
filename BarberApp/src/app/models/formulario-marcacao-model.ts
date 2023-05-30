@@ -7,5 +7,5 @@ export interface FormularioMarcacao {
   data: string;
   hora: string;
   servicos: string[];
-  valor: Number;
+  valor: number;
 }

@@ -11,15 +11,15 @@
     </ion-title>
   </ion-toolbar>
   <ion-card class="cardInfo">
-    <ion-card-content> Escolha teu barbeiro </ion-card-content>
+    <ion-card-content> {{chatText}} </ion-card-content>
   </ion-card>
 </ion-header>
 
 
 
 <ion-content [fullscreen]="true">
-  <div *ngIf="!selectBarbeiro">
-    <ion-slides #swiper class="banners" (ionSlideDidChange)="UserChange()" [pager]="true"
+  <div *ngIf="!selectBarbeiro && !selectHorario" class="selecaoBarbeiro">
+    <ion-slides #swiper class="banners" (ionSlideDidChange)="barberChange()" [pager]="true"
       [options]="sliderBarberOptions">
       <ion-slide *ngFor="let barbeiro of barbeiros">
         <div align="center">
@@ -47,27 +47,27 @@
 
     <div class="button">
       <ion-button (click)="escolheBarbeiro()">
-        <ion-icon name="checkmark-circle-outline"></ion-icon>
         Escolher Barbeiro
+        <ion-icon name="checkmark-circle-outline"></ion-icon>
       </ion-button>
     </div>
   </div>
 
-  <div *ngIf="selectBarbeiro">
-    <ion-button shape="round" style="width: 20%;" (click)="voltarParabarbeiros()">
-      <ion-icon name="arrow-undo-outline"></ion-icon>
-    </ion-button>
-
-
-    <ion-list lines="none" style="gap:4rem">
+  <div *ngIf="selectBarbeiro" class="selecaoServicos">
+    <ion-list lines="none" style="gap:4rem; margin-top: 10%">
+      <p style="text-align: center;">
+        <ion-icon name="cut"></ion-icon>
+        <strong>Serviços prestados por {{barberSelectedName}}!!</strong>
+        <ion-icon name="cut"></ion-icon>
+      </p>
       <ion-item *ngFor="let servico of servicosUser">
         <div class="selectServiceList">
           <p>{{servico.nome}}</p>
           <ion-fab style="position: relative;">
-            <ion-fab-button size="small" (click)="activated(servico)">
-                <ion-img src="../../../assets/tesouraPente.png"></ion-img>
+            <ion-fab-button size="small" (click)="selecaoDeServico(servico)">
+              <ion-img src="../../../assets/tesouraPente.png"></ion-img>
             </ion-fab-button>
-            <ion-fab-list side="end" >
+            <ion-fab-list side="end">
               <ion-fab-button>
                 Valor
               </ion-fab-button>
@@ -80,11 +80,19 @@
       </ion-item>
     </ion-list>
 
+
+    <ion-button shape="round" style="width: 20%;" (click)="voltarParabarbeiros()">
+      <ion-icon name="arrow-undo-outline"></ion-icon>
+    </ion-button>
+
     <div class="button">
-      <ion-button>
+      <ion-button (click)="confirmarServicos()">
         {{valorFinal| currency : 'BRL'}}
       </ion-button>
     </div>
   </div>
-
+  <div *ngIf="selectHorario" class="selecaoHorarios">
+    <h1>HORARIOS</h1>
+    <ion-datetime presentation="date"></ion-datetime>
+  </div>
 </ion-content>

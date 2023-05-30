@@ -1,7 +1,7 @@
 
 
 export interface Barbeiro {
-    id: String,
+    id: string,
     nome: string,
     email: string,
     senha: string,
