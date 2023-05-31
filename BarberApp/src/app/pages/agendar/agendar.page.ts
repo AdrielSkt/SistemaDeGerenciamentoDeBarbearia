@@ -5,6 +5,7 @@ import { FormularioMarcacao } from 'src/app/models/formulario-marcacao-model';
 import { Servico } from 'src/app/models/servicos-model';
 import { ServicoSelect } from 'src/app/models/servicos-user-select';
 import { BarbeirosService } from 'src/app/service/barbeiros.service';
+import { FormulariosService } from 'src/app/service/formulario.service';
 import { ServicosService } from 'src/app/service/servicos.service';
 
 
@@ -60,13 +61,11 @@ export class AgendarPage implements OnInit {
   barbeiros: Barbeiro[] = [];
   allServicos: Servico[] = [];
   servicosUser: ServicoSelect[] = [];
-  //Selecao de servicos
-  selectBarbeiro: boolean = false;
-  valorFinal: number = 0;
-  barberSelectedName: string = '';
-  // selecao de horarios
-  selectHorario: boolean = false;
-  constructor(private servicosService: ServicosService, private barbeirosService: BarbeirosService) { }
+
+  constructor(private servicosService: ServicosService, private barbeirosService: BarbeirosService, private formulariosService: FormulariosService) { 
+    const dataAtual = new Date();
+    this.selectedDate = dataAtual.toISOString();
+  }
 
 
   ngOnInit() {
@@ -156,6 +155,11 @@ export class AgendarPage implements OnInit {
   }
 
   //SELECAO DE SERVICOS
+    selectBarbeiro: boolean = false;
+    valorFinal: number = 0;
+    barberSelectedName: string = '';
+
+
   voltarParabarbeiros() {
     this.barbeiros = [];
     this.allServicos = [];
@@ -190,7 +194,68 @@ export class AgendarPage implements OnInit {
   }
 
   //SELECAO DE HORARIOS
+  selectedDate: string = '';
+  selectHorario: boolean = false;
+  listaFormulariosExist: FormularioMarcacao [] = [];
+  horarioAtual = undefined;
+  todosHorarios = [
+    {id: 1, nome:'8:00'},
+    {id: 2, nome:'9:00'},
+    {id: 3, nome:'10:00'},
+    {id: 4, nome:'11:00'},
+    {id: 5, nome:'12:00'},
+    {id: 6, nome:'13:00'},
+    {id: 7, nome:'14:00'},
+    {id: 8, nome:'15:00'},
+    {id: 9, nome:'16:00'},
+    {id: 10, nome:'17:00'} ];
+    horariosPossiveis = this.todosHorarios;
 
+  async onDateChange() {
+    const dataFormatada = new Date(this.selectedDate);
+    this.listaFormulariosExist = [];
+    this.horariosPossiveis = this.todosHorarios;
+    await this.obtemFormularios(dataFormatada.toLocaleDateString("pt-BR").replace(/\//g, '-'));
+
+     
+  }
+
+  compareWith(o1: any, o2: any) {
+    return o1 && o2 ? o1.id === o2.id : o1 === o2;
+  }
+  changeHorario(ev: any) {
+    this.horarioAtual = ev.target.value;
+    console.log(this.horarioAtual)
+  }
+
+  obtemFormularios(data: string) {
+    this.formulariosService.getAll().subscribe((result) => {
+      result.forEach((item: any) => {
+        const formulario: FormularioMarcacao = {
+          id: item.id,
+          nomeCliente: item.nomeCliente,
+          idBarbeiro: item.idBarbeiro,
+          data: item.data,
+          hora: item.hora,
+          servicos: item.servicos,
+          valor: item.valor
+        }
+        if(data == formulario.data && this.formulario.idBarbeiro == formulario.idBarbeiro){
+          this.verificaHorariosDisponiveis(formulario);
+          this.listaFormulariosExist.push(formulario);
+        }
+        
+      }
+      );
+    });
+  }
+
+  verificaHorariosDisponiveis(formulario: FormularioMarcacao){
+    console.log(formulario);
+    console.log("entrou");
+      this.horariosPossiveis = this.horariosPossiveis.filter((horario)=> horario.nome !== formulario.hora)
+
+  }
 
 
 }

@@ -65,11 +65,11 @@
           <p>{{servico.nome}}</p>
           <ion-fab style="position: relative;">
             <ion-fab-button size="small" (click)="selecaoDeServico(servico)">
-              <ion-img src="../../../assets/tesouraPente.png"></ion-img>
+              <ion-icon name="logo-usd"></ion-icon>
             </ion-fab-button>
-            <ion-fab-list side="end">
-              <ion-fab-button>
-                Valor
+            <ion-fab-list side="end" style="--background: blue;">
+              <ion-fab-button >
+                <ion-icon name="logo-usd"></ion-icon>
               </ion-fab-button>
               <ion-fab-button>
                 {{servico.valor}}
@@ -91,8 +91,16 @@
       </ion-button>
     </div>
   </div>
+
   <div *ngIf="selectHorario" class="selecaoHorarios">
     <h1>HORARIOS</h1>
-    <ion-datetime presentation="date"></ion-datetime>
+    <ion-datetime class="calendario" presentation="date" displayFormat="DD/MM/YYYY" [(ngModel)]="selectedDate" (ionChange)="onDateChange()"></ion-datetime>
+
+    <ion-select aria-label="Horario" 
+                placeholder="Selecione o Horario" 
+                [compareWith]="compareWith"
+                (ionChange)="changeHorario($event)">
+      <ion-select-option *ngFor="let horario of horariosPossiveis" [value]="horario">{{horario.nome}}</ion-select-option>
+    </ion-select>
   </div>
 </ion-content>

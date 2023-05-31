@@ -129,3 +129,33 @@ ion-content {
   align-items: center;
   flex-direction: column;
 }
+
+.calendario{
+  background: #ffffff;
+}
+
+ion-select {
+  --placeholder-color: #000000;
+  --placeholder-opacity: 1;
+  width: 100%;
+  justify-content: center;
+}
+
+ion-select::part(placeholder),
+ion-select::part(text) {
+  flex: 0 0 auto;
+}
+
+ion-select::part(placeholder)::first-letter {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+ion-select::part(text) {
+  color: #001aff;
+}
+
+ion-select::part(icon) {
+  color: #000000;
+  opacity: 1;
+}
