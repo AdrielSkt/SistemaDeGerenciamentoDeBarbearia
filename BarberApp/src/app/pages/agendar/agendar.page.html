@@ -87,7 +87,7 @@
 
   <div *ngIf="selectHorario" class="selecaoHorarios">
     <h1> <ion-icon (click)="voltarParaServicos()" name="arrow-undo-outline"></ion-icon>HORARIOS</h1>
-    <ion-datetime  locale="es-ES" class="calendario" presentation="date" displayFormat="DD/MM/YYYY" [(ngModel)]="selectedDate"
+    <ion-datetime  class="calendario" presentation="date" displayFormat="DD/MM/YYYY" [(ngModel)]="selectedDate"
       (ionChange)="onDateChange()"></ion-datetime>
 
     <ion-select aria-label="Horario" placeholder="Selecione o Horario" [compareWith]="compareWith"

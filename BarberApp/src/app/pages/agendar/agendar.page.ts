@@ -47,7 +47,7 @@ export class AgendarPage implements OnInit {
 
   };
   formulario: FormularioMarcacao = {
-    id: '',
+    //id: '',
     nomeCliente: '',
     idBarbeiro: '',
     data: '',
@@ -243,7 +243,7 @@ export class AgendarPage implements OnInit {
     this.formulariosService.getAll().subscribe((result) => {
       result.forEach((item: any) => {
         const formulario: FormularioMarcacao = {
-          id: item.id,
+          //id: item.id,
           nomeCliente: item.nomeCliente,
           idBarbeiro: item.idBarbeiro,
           data: item.data,
@@ -277,7 +277,8 @@ export class AgendarPage implements OnInit {
 
   }
 
-  concluirMarcacao(){
+  async concluirMarcacao(){
+    await this.formulariosService.create(this.formulario);
     if(this.modal)
     this.modal.dismiss(null, 'cancel');
     this.navCtrl.navigateRoot('home/home/agendamentos', { replaceUrl: true });
