@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { IonSlides, LoadingController } from '@ionic/angular';
+import { IonModal, IonSlides, LoadingController } from '@ionic/angular';
 import { Barbeiro } from 'src/app/models/barbeiro-model';
 import { FormularioMarcacao } from 'src/app/models/formulario-marcacao-model';
 import { Servico } from 'src/app/models/servicos-model';
@@ -7,7 +7,7 @@ import { ServicoSelect } from 'src/app/models/servicos-user-select';
 import { BarbeirosService } from 'src/app/service/barbeiros.service';
 import { FormulariosService } from 'src/app/service/formulario.service';
 import { ServicosService } from 'src/app/service/servicos.service';
-
+import { NavController } from '@ionic/angular';
 
 
 
@@ -18,7 +18,7 @@ import { ServicosService } from 'src/app/service/servicos.service';
 })
 export class AgendarPage implements OnInit {
   @ViewChild('swiper', { static: false }) swiper: IonSlides | undefined;
-
+  @ViewChild(IonModal) modal: IonModal | undefined;
   sliderBarberOptions = {
     slidesPerView: 1,
     spaceBetween: 10,
@@ -62,7 +62,7 @@ export class AgendarPage implements OnInit {
   allServicos: Servico[] = [];
   servicosUser: ServicoSelect[] = [];
 
-  constructor(private servicosService: ServicosService, private barbeirosService: BarbeirosService, private formulariosService: FormulariosService) { 
+  constructor(private navCtrl: NavController,private servicosService: ServicosService, private barbeirosService: BarbeirosService, private formulariosService: FormulariosService) { 
     const dataAtual = new Date();
     this.selectedDate = dataAtual.toISOString();
   }
@@ -73,6 +73,7 @@ export class AgendarPage implements OnInit {
     this.selectBarbeiro = false;
     this.obterServicos();
     this.obtemBarbeiros();
+    this.onDateChange();
 
 
 
@@ -158,7 +159,7 @@ export class AgendarPage implements OnInit {
     selectBarbeiro: boolean = false;
     valorFinal: number = 0;
     barberSelectedName: string = '';
-
+    servicosEscolhidos: ServicoSelect[] = [];
 
   voltarParabarbeiros() {
     this.barbeiros = [];
@@ -167,6 +168,7 @@ export class AgendarPage implements OnInit {
     this.obtemBarbeiros();
     this.selectBarbeiro = false;
     this.formulario.servicos = [];
+    this.servicosEscolhidos = [];
     this.valorFinal = 0;
     this.chatText = 'Escolha teu barbeiro';
   }
@@ -177,11 +179,13 @@ export class AgendarPage implements OnInit {
       this.servicosUser[index].selecao = false;
       this.valorFinal -= selecao.valor;
       this.formulario.servicos = this.formulario.servicos.filter(id => id != selecao.id);
+      this.servicosEscolhidos = this.servicosEscolhidos.filter(servico => servico.id != selecao.id);
 
     } else if (selecao.selecao == false) {
       this.servicosUser[index].selecao = true;
       this.valorFinal = +this.valorFinal + +selecao.valor;
       this.formulario.servicos.push(selecao.id);
+      this.servicosEscolhidos.push(selecao);
     }
 
   }
@@ -197,7 +201,7 @@ export class AgendarPage implements OnInit {
   selectedDate: string = '';
   selectHorario: boolean = false;
   listaFormulariosExist: FormularioMarcacao [] = [];
-  horarioAtual = undefined;
+  horarioAtual = {id: 0, nome: ''};
   todosHorarios = [
     {id: 1, nome:'8:00'},
     {id: 2, nome:'9:00'},
@@ -210,12 +214,19 @@ export class AgendarPage implements OnInit {
     {id: 9, nome:'16:00'},
     {id: 10, nome:'17:00'} ];
     horariosPossiveis = this.todosHorarios;
+    dataFormatada!: Date;
+    voltarParaServicos(){
+      this.selectBarbeiro = true;
+      this.selectHorario = false;
+      this.selectedDate = '';
+      this.horarioAtual = {id: 0, nome: ''};
+    }
 
   async onDateChange() {
-    const dataFormatada = new Date(this.selectedDate);
+     this.dataFormatada = new Date(this.selectedDate);
     this.listaFormulariosExist = [];
     this.horariosPossiveis = this.todosHorarios;
-    await this.obtemFormularios(dataFormatada.toLocaleDateString("pt-BR").replace(/\//g, '-'));
+    await this.obtemFormularios(this.dataFormatada.toLocaleDateString("pt-BR").replace(/\//g, '-'));
 
      
   }
@@ -255,6 +266,22 @@ export class AgendarPage implements OnInit {
     console.log("entrou");
       this.horariosPossiveis = this.horariosPossiveis.filter((horario)=> horario.nome !== formulario.hora)
 
+  }
+
+  finalizarPreenchimentoFormulario(){
+    this.formulario.data = this.dataFormatada.toLocaleDateString("pt-BR").replace(/\//g, '-');
+    if(this.horarioAtual){
+      this.formulario.hora = this.horarioAtual.nome;
+    }
+    console.log(this.formulario)
+
+  }
+
+  concluirMarcacao(){
+    if(this.modal)
+    this.modal.dismiss(null, 'cancel');
+    this.navCtrl.navigateRoot('home/home/agendamentos', { replaceUrl: true });
+    
   }
 
 

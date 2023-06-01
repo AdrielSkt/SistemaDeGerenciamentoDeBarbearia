@@ -54,12 +54,10 @@
   </div>
 
   <div *ngIf="selectBarbeiro" class="selecaoServicos">
-    <ion-list lines="none" style="gap:4rem; margin-top: 10%">
-      <p style="text-align: center;">
-        <ion-icon name="cut"></ion-icon>
-        <strong>Serviços prestados por {{barberSelectedName}}!!</strong>
-        <ion-icon name="cut"></ion-icon>
-      </p>
+    <ion-list lines="none" style="gap:4rem">
+      <div style="text-align: center;">
+        <h1><ion-icon (click)="voltarParabarbeiros()" name="arrow-undo-outline"></ion-icon>Serviços prestados por {{barberSelectedName}}!!</h1>
+      </div>
       <ion-item *ngFor="let servico of servicosUser">
         <div class="selectServiceList">
           <p>{{servico.nome}}</p>
@@ -68,7 +66,7 @@
               <ion-icon name="logo-usd"></ion-icon>
             </ion-fab-button>
             <ion-fab-list side="end" style="--background: blue;">
-              <ion-fab-button >
+              <ion-fab-button>
                 <ion-icon name="logo-usd"></ion-icon>
               </ion-fab-button>
               <ion-fab-button>
@@ -80,11 +78,6 @@
       </ion-item>
     </ion-list>
 
-
-    <ion-button shape="round" style="width: 20%;" (click)="voltarParabarbeiros()">
-      <ion-icon name="arrow-undo-outline"></ion-icon>
-    </ion-button>
-
     <div class="button">
       <ion-button (click)="confirmarServicos()">
         {{valorFinal| currency : 'BRL'}}
@@ -93,14 +86,55 @@
   </div>
 
   <div *ngIf="selectHorario" class="selecaoHorarios">
-    <h1>HORARIOS</h1>
-    <ion-datetime class="calendario" presentation="date" displayFormat="DD/MM/YYYY" [(ngModel)]="selectedDate" (ionChange)="onDateChange()"></ion-datetime>
+    <h1> <ion-icon (click)="voltarParaServicos()" name="arrow-undo-outline"></ion-icon>HORARIOS</h1>
+    <ion-datetime  locale="es-ES" class="calendario" presentation="date" displayFormat="DD/MM/YYYY" [(ngModel)]="selectedDate"
+      (ionChange)="onDateChange()"></ion-datetime>
 
-    <ion-select aria-label="Horario" 
-                placeholder="Selecione o Horario" 
-                [compareWith]="compareWith"
-                (ionChange)="changeHorario($event)">
-      <ion-select-option *ngFor="let horario of horariosPossiveis" [value]="horario">{{horario.nome}}</ion-select-option>
+    <ion-select aria-label="Horario" placeholder="Selecione o Horario" [compareWith]="compareWith"
+      (ionChange)="changeHorario($event)">
+      <ion-select-option *ngFor="let horario of horariosPossiveis"
+        [value]="horario">{{horario.nome}}</ion-select-option>
     </ion-select>
+
+
+
+    <div class="button">
+      <ion-button (click)="finalizarPreenchimentoFormulario()" id="open-modal">Ir para confirmação</ion-button>
+    </div>
+
+    <ion-modal trigger="open-modal" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
+      <ng-template>
+        <div class="marcar">
+          <ion-card style="background-color: ghostwhite;">
+            <ion-card-header>
+              <ion-card-title>Card de Marcação de Horario</ion-card-title>
+              <ion-card-subtitle>Barbeiro(a): <strong> {{barberSelectedName}}</strong></ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-list>
+                <ion-card-subtitle>Serviços</ion-card-subtitle>
+                <ion-item *ngFor="let servicos of servicosEscolhidos">
+                  <ion-icon name="cut"></ion-icon>
+                  <ion-label>{{servicos.nome}}</ion-label>
+                </ion-item>
+                <ion-card-subtitle>Data/Hora</ion-card-subtitle>
+                <ion-item>
+                  <ion-icon name="time"></ion-icon>
+                  <ion-label>Dia {{formulario.data}} as {{formulario.hora}} hrs</ion-label>
+                </ion-item>
+                <ion-card-subtitle>Valor</ion-card-subtitle>
+                <ion-item>
+                  <ion-icon name="wallet"></ion-icon>
+                  <ion-label>{{formulario.valor| currency : 'BRL'}}</ion-label>
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+          <div class="button">
+            <ion-button (click)="concluirMarcacao()" id="open-modal">Concluir Marcação</ion-button>
+          </div>
+        </div>
+      </ng-template>
+    </ion-modal>
   </div>
 </ion-content>
