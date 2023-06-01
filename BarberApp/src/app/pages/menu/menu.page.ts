@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-menu',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuPage implements OnInit {
 
-  constructor() { }
+  constructor(private navCtrl: NavController) { }
 
   ngOnInit() {
   }
+irParaAgendar(){
+  this.navCtrl.navigateRoot('home/home/agendar', { replaceUrl: true });
+}
 
+irParaAgendamentos(){
+  this.navCtrl.navigateRoot('home/home/agendamentos', { replaceUrl: true });
+}
 }

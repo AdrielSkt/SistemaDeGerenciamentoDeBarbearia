@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Firestore, collection, collectionData, doc, docData, getDoc } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, doc, getDoc, addDoc, DocumentReference  } from '@angular/fire/firestore';
 import { Observable } from "rxjs";
 
 
@@ -12,9 +12,15 @@ export class FormulariosService {
   constructor(private firestore: Firestore) {
 
   }
+  
   docRef(path: string){
     return doc(this.firestore, this.collection+path);
   }
+
+  create(data: any): Promise<DocumentReference<any>> {
+    return addDoc(collection(this.firestore, this.collection), data);
+  }
+
   getAll(): Observable<any[]> {
     const query = collection(this.firestore, this.collection);
     return collectionData(query, { idField: 'id' });
