@@ -7,6 +7,12 @@ const routes: Routes = [
     loadChildren: () => import('./pages/navbar/navbar.module').then( m => m.NavbarPageModule)
   },
   {
+    path: 'login',  loadChildren:() => import ('./screen/login/login.module').then(m => m.LoginPageModule)
+  },
+  {
+    path: 'signup',  loadChildren:() => import ('./screen/signup/signup.module').then(m => m.SignupPageModule)
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
