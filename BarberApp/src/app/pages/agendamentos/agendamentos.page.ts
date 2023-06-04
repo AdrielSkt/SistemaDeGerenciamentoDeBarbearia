@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 import { FormularioMarcacao } from 'src/app/models/formulario-marcacao-model';
 import { AuthService } from 'src/app/service/auth.service';
 import { ClienteService } from 'src/app/service/cliente.service';
 import { FormulariosService } from 'src/app/service/formulario.service';
+import { ServicosService } from 'src/app/service/servicos.service';
 
 
 @Component({
@@ -14,7 +16,12 @@ export class AgendamentosPage implements OnInit {
   nomeCliente: string = '';
   idUser: string = '';
   FormHorariosMarcados: FormularioMarcacao [] = [];
-  constructor(private authService: AuthService, private clienteService: ClienteService, private formularioService: FormulariosService) { }
+  constructor(private authService: AuthService, 
+              private clienteService: ClienteService, 
+              private formularioService: FormulariosService, 
+              private servicosService: ServicosService,
+              private alertController: AlertController
+  ) { }
 
   ngOnInit() {
     this.buscarDadosCliente();
@@ -46,16 +53,19 @@ buscarFormulariosMarcados(){
     this.FormHorariosMarcados = [];
     result.forEach((item: any) => {
       const formulario: FormularioMarcacao = {
-        //id: item.id,
+        id: item.id,
         nomeCliente: item.nomeCliente,
         idCliente: item.idCliente,
         nomeBarbeiro: item.nomeBarbeiro,
         idBarbeiro: item.idBarbeiro,
         data: item.data,
         hora: item.hora,
-        servicos: item.servicos,
+        servicos: [],
         valor: item.valor
-      }
+      };
+      item.servicos.forEach(async (id: string)=>{
+        formulario.servicos.push(await this.buscarServico(id));
+      })
       console.log(formulario)
       if(formulario.idCliente == this.idUser){
         this.FormHorariosMarcados.push(formulario);
@@ -63,6 +73,33 @@ buscarFormulariosMarcados(){
     }
     );
   });
+}
+
+  async buscarServico(id: string): Promise<string> {
+  let nomeServico: string  = '';
+  await this.servicosService.getDocById(id).then((documentSnapshot) => {
+    if (documentSnapshot.exists()) {
+      const data = documentSnapshot.data();
+      nomeServico = data['nome'];
+    } else {
+      // Servico não encontrado
+      console.log('Serviço não encontrado.');
+    }
+  });
+  return nomeServico;
+}
+
+
+  async deletarHorario(id: string){
+  console.log(id)
+  this.formularioService.deleteDoc(id);
+  const alert = await this.alertController.create({
+    header: 'REGISTRO EXCLUIDO',
+    subHeader: 'Serviço cancelado',
+    message: 'O horario marcado foi excuido com sucesso!',
+    buttons: ['OK'],
+  });
+  await alert.present();
 }
 
 

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Firestore, collection, collectionData, doc, getDoc, addDoc, DocumentReference  } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, doc, getDoc, addDoc, DocumentReference, deleteDoc  } from '@angular/fire/firestore';
 import { Observable } from "rxjs";
 
 
@@ -19,6 +19,11 @@ export class FormulariosService {
 
   create(data: any): Promise<DocumentReference<any>> {
     return addDoc(collection(this.firestore, this.collection), data);
+  }
+
+  deleteDoc(path: string): Promise<void> {
+    const docReference = this.docRef(path);
+    return deleteDoc(docReference);
   }
 
   getAll(): Observable<any[]> {

@@ -19,12 +19,13 @@
   <ion-list>
     <ion-item class="item" *ngFor="let horario of FormHorariosMarcados; let index">
       <div>
-
-       
         <ion-label><strong>Horario:</strong>{{ horario.data}} <strong>as</strong> {{horario.hora}}</ion-label>
         <ion-label><strong>Barbeiro:</strong>{{ horario.nomeBarbeiro }}</ion-label>
         <ion-label><strong>Valor:</strong> {{ horario.valor | currency : 'BRL'}}</ion-label>
-        <ion-fab-button><ion-icon name="trash"></ion-icon></ion-fab-button>
+        <ion-fab-button (click)="deletarHorario(horario.id ?horario.id : '')"><ion-icon name="trash"></ion-icon></ion-fab-button>
+        <div>
+          <ion-label *ngFor="let servico of horario.servicos"><ion-icon name="pricetags"></ion-icon>{{servico}}</ion-label>
+        </div>
       </div>
 
     </ion-item>

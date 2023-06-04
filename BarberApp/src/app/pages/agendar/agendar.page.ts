@@ -202,10 +202,12 @@ export class AgendarPage implements OnInit {
   }
 
   selecaoDeServico(selecao: ServicoSelect) {
+    console.log(selecao.selecao)
     const index = this.servicosUser.findIndex(servico => selecao.id == servico.id);
+    console.log(index)
     if (selecao.selecao == true) {
       this.servicosUser[index].selecao = false;
-      this.valorFinal -= selecao.valor;
+      this.valorFinal = +this.valorFinal - +selecao.valor;
       this.formulario.servicos = this.formulario.servicos.filter(id => id != selecao.id);
       this.servicosEscolhidos = this.servicosEscolhidos.filter(servico => servico.id != selecao.id);
 
