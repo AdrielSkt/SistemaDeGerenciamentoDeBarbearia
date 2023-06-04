@@ -32,30 +32,4 @@ export class FormulariosService {
        return getDoc(dataRef);
    }
 
-
-
-
-   
-
-  getDocById2(path: string){
-    const dataRef = this.docRef(path);
-
-    return getDoc(dataRef).then((documentSnapshot) => {
-      if (documentSnapshot.exists()) {
-        const data = documentSnapshot.data();
-        // Faça o processamento dos dados aqui
-        console.log(data);
-        return data;
-      } else {
-        // Documento não encontrado
-        console.log('Documento não encontrado.');
-        return null;
-      }
-    }).catch((error) => {
-      // Lidar com erros
-      console.error('Erro ao obter o documento:', error);
-      throw error;
-    });
-  }
-
 }
