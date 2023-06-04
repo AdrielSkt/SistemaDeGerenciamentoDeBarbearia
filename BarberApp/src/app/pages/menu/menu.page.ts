@@ -34,10 +34,10 @@ export class MenuPage implements OnInit {
   }
 
   irParaAgendar() {
-    this.navCtrl.navigateRoot('home/home/agendar', { replaceUrl: true });
+    this.navCtrl.navigateRoot('home/home/agendar');
   }
 
   irParaAgendamentos() {
-    this.navCtrl.navigateRoot('home/home/agendamentos', { replaceUrl: true });
+    this.navCtrl.navigateRoot('home/home/agendamentos');
   }
 }

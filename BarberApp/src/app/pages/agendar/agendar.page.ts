@@ -52,6 +52,7 @@ export class AgendarPage implements OnInit {
     //id: '',
     nomeCliente: '',
     idCliente: '',
+    nomeBarbeiro: '',
     idBarbeiro: '',
     data: '',
     hora: '',
@@ -263,7 +264,6 @@ export class AgendarPage implements OnInit {
   }
   changeHorario(ev: any) {
     this.horarioAtual = ev.target.value;
-    console.log(this.horarioAtual)
   }
 
   obtemFormularios(data: string) {
@@ -273,6 +273,7 @@ export class AgendarPage implements OnInit {
           //id: item.id,
           nomeCliente: item.nomeCliente,
           idCliente: item.idCliente,
+          nomeBarbeiro: item.nomeBarbeiro,
           idBarbeiro: item.idBarbeiro,
           data: item.data,
           hora: item.hora,
@@ -290,26 +291,33 @@ export class AgendarPage implements OnInit {
   }
 
   verificaHorariosDisponiveis(formulario: FormularioMarcacao){
-    console.log(formulario);
-    console.log("entrou");
       this.horariosPossiveis = this.horariosPossiveis.filter((horario)=> horario.nome !== formulario.hora)
 
   }
 
   finalizarPreenchimentoFormulario(){
     this.formulario.data = this.dataFormatada.toLocaleDateString("pt-BR").replace(/\//g, '-');
+    this.formulario.nomeBarbeiro = this.barberSelectedName;
     if(this.horarioAtual){
       this.formulario.hora = this.horarioAtual.nome;
     }
-    console.log(this.formulario)
+    //colocar validação para botão ativo apenas quando todos os dados estiverem selecionados
 
   }
 
   async concluirMarcacao(){
-    await this.formulariosService.create(this.formulario);
-    if(this.modal)
-    this.modal.dismiss(null, 'cancel');
-    this.navCtrl.navigateRoot('home/home/agendamentos', { replaceUrl: true });
+    try {
+      const docConfirm  = await this.formulariosService.create(this.formulario);
+      if(this.modal && docConfirm){
+        console.log("AGENDAR")
+        this.navCtrl.navigateRoot('home/home/agendamentos', { replaceUrl: true });
+        this.modal.dismiss(null, 'cancel');
+      }
+
+    } catch (error) {
+      console.log("Erro ao criar marcação")
+    }
+
     
   }
 

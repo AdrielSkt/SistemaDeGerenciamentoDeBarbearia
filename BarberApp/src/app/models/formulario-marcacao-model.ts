@@ -4,6 +4,7 @@ export interface FormularioMarcacao {
   //id: string;
   nomeCliente: string;
   idCliente: string;
+  nomeBarbeiro: string;
   idBarbeiro: string;
   data: string;
   hora: string;
