@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/service/auth.service';
+import { ClienteService } from 'src/app/service/cliente.service';
 
 
 @Component({
@@ -7,9 +9,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./agendamentos.page.scss'],
 })
 export class AgendamentosPage implements OnInit {
-  constructor() { }
+  nomeCliente: string = '';
+  constructor(private authService: AuthService, private clienteService: ClienteService) { }
 
   ngOnInit() {
+    this.buscarDadosCliente()
+  }
+
+  buscarDadosCliente() {
+    const idCliente = this.authService.getCurrentUserId();
+    if (idCliente) {
+      this.clienteService.getDocById(idCliente).then((documentSnapshot) => {
+        if (documentSnapshot.exists()) {
+          const data = documentSnapshot.data();
+          this.nomeCliente = data['nome'];
+        } else {
+          // Documento não encontrado
+          console.log('Documento não encontrado.');
+        }
+      })
+
+    }
   }
 
 }

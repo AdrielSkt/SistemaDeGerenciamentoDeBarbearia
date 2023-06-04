@@ -8,6 +8,8 @@ import { BarbeirosService } from 'src/app/service/barbeiros.service';
 import { FormulariosService } from 'src/app/service/formulario.service';
 import { ServicosService } from 'src/app/service/servicos.service';
 import { NavController } from '@ionic/angular';
+import { AuthService } from 'src/app/service/auth.service';
+import { ClienteService } from 'src/app/service/cliente.service';
 
 
 
@@ -49,6 +51,7 @@ export class AgendarPage implements OnInit {
   formulario: FormularioMarcacao = {
     //id: '',
     nomeCliente: '',
+    idCliente: '',
     idBarbeiro: '',
     data: '',
     hora: '',
@@ -57,12 +60,18 @@ export class AgendarPage implements OnInit {
   }
   //Header
   chatText: string = 'Escolha teu barbeiro';
+  nomeCliente: string = '';
   //Selecao de barbeiros
   barbeiros: Barbeiro[] = [];
   allServicos: Servico[] = [];
   servicosUser: ServicoSelect[] = [];
 
-  constructor(private navCtrl: NavController,private servicosService: ServicosService, private barbeirosService: BarbeirosService, private formulariosService: FormulariosService) { 
+  constructor(private navCtrl: NavController,
+              private servicosService: ServicosService, 
+              private barbeirosService: BarbeirosService, 
+              private formulariosService: FormulariosService,
+              private authService: AuthService, 
+              private clienteService: ClienteService) { 
     const dataAtual = new Date();
     this.selectedDate = dataAtual.toISOString();
   }
@@ -74,10 +83,28 @@ export class AgendarPage implements OnInit {
     this.obterServicos();
     this.obtemBarbeiros();
     this.onDateChange();
-
-
+    this.buscarDadosCliente();
 
   }
+
+  buscarDadosCliente() {
+    const idCliente = this.authService.getCurrentUserId();
+    if (idCliente) {
+      this.clienteService.getDocById(idCliente).then((documentSnapshot) => {
+        if (documentSnapshot.exists()) {
+          const data = documentSnapshot.data();
+          this.nomeCliente = data['nome'];
+          this.formulario.idCliente = idCliente;
+          this.formulario.nomeCliente = this.nomeCliente;
+        } else {
+          // Documento não encontrado
+          console.log('Documento não encontrado.');
+        }
+      })
+
+    }
+  }
+
 
   obtemBarbeiros() {
     this.barbeirosService.getAll().subscribe((result) => {
@@ -245,6 +272,7 @@ export class AgendarPage implements OnInit {
         const formulario: FormularioMarcacao = {
           //id: item.id,
           nomeCliente: item.nomeCliente,
+          idCliente: item.idCliente,
           idBarbeiro: item.idBarbeiro,
           data: item.data,
           hora: item.hora,

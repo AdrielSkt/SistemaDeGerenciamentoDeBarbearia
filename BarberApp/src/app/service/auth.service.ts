@@ -18,7 +18,6 @@ export class AuthService {
     try {
       const confirmationResult = await signInWithEmailAndPassword(this._fireAuth, email, senha);
       this.confirmationResult = confirmationResult;
-      console.log(confirmationResult.providerId)
       return confirmationResult;
     } catch(e) {
       throw(e);

@@ -13,13 +13,22 @@ export class MenuPage implements OnInit {
   constructor(private navCtrl: NavController, private authService: AuthService, private clienteService: ClienteService) { }
 
   ngOnInit() {
+    this.buscarDadosCliente()
   }
 
 
   buscarDadosCliente() {
     const idCliente = this.authService.getCurrentUserId();
-    console.log(idCliente);
     if (idCliente) {
+      this.clienteService.getDocById(idCliente).then((documentSnapshot) => {
+        if (documentSnapshot.exists()) {
+          const data = documentSnapshot.data();
+          this.nomeCliente = data['nome'];
+        } else {
+          // Documento não encontrado
+          console.log('Documento não encontrado.');
+        }
+      })
 
     }
   }
