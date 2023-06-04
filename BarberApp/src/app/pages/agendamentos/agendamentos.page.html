@@ -17,10 +17,16 @@
 
 <ion-content [fullscreen]="true">
   <ion-list>
-    <ion-item *ngFor="let horario of FormHorariosMarcados; let index">
-      <ion-label>{{ horario.nomeBarbeiro }}</ion-label>
-      <ion-fab-button>{{ horario.valor | currency : 'BRL'}}</ion-fab-button>
-      <ion-label>{{ horario.data}} | {{horario.hora}}</ion-label>
+    <ion-item class="item" *ngFor="let horario of FormHorariosMarcados; let index">
+      <div>
+
+       
+        <ion-label><strong>Horario:</strong>{{ horario.data}} <strong>as</strong> {{horario.hora}}</ion-label>
+        <ion-label><strong>Barbeiro:</strong>{{ horario.nomeBarbeiro }}</ion-label>
+        <ion-label><strong>Valor:</strong> {{ horario.valor | currency : 'BRL'}}</ion-label>
+        <ion-fab-button><ion-icon name="trash"></ion-icon></ion-fab-button>
+      </div>
+
     </ion-item>
   </ion-list>
 </ion-content>
