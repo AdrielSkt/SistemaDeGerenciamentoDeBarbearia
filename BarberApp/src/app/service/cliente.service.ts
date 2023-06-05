@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Firestore, doc, getDoc } from '@angular/fire/firestore';
+import { Firestore, doc, getDoc, setDoc } from '@angular/fire/firestore';
 
 
 @Injectable({
@@ -19,5 +19,16 @@ export class ClienteService {
        console.log(dataRef.id);
        return getDoc(dataRef);
    }
+
+   createNewUser(id: string, cliente: any){
+    const docRef = doc(this.firestore, this.collection + id);
+    setDoc(docRef, cliente)
+      .then(() => {
+        console.log("Documento criado com ID: ", docRef.id);
+      })
+      .catch((error) => {
+        console.error("Erro ao criar documento: ", error);
+      });
+  }
 
 }

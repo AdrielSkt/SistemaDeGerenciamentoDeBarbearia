@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from '@angular/fire/auth';
+import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -28,8 +28,7 @@ export class AuthService {
     try {
       const confirmationResult = await createUserWithEmailAndPassword(this._fireAuth, email, senha);
       this.confirmationResult = confirmationResult;
-      console.log(confirmationResult)
-      return confirmationResult;
+      return confirmationResult.user.uid;
     } catch(e) {
       throw(e);
     }
@@ -38,6 +37,11 @@ export class AuthService {
   getCurrentUserId(): string | undefined {
     return this._fireAuth.currentUser?.uid;
   
+  }
+
+  async logOut(){
+    await signOut(this._fireAuth);
+    console.log(this.getCurrentUserId());
   }
 
 }

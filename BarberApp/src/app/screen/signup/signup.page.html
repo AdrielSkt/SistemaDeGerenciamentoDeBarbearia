@@ -7,20 +7,20 @@
 
       <ion-item fill="outline">
         <ion-label position="floating">Email</ion-label>
-        <ion-input></ion-input>
+        <ion-input [(ngModel)]="email"></ion-input>
       </ion-item>
       <div class="margin"></div>
       <ion-item fill="outline">
         <ion-label position="floating">Nome</ion-label>
-        <ion-input></ion-input>
+        <ion-input [(ngModel)]="nome"></ion-input>
       </ion-item>
       <div class="margin"></div>
       <ion-item fill="outline">
         <ion-label position="floating">Senha</ion-label>
-        <ion-input type="password"></ion-input>
+        <ion-input type="password" [(ngModel)]="senha"></ion-input>
       </ion-item>
       <div class="margin"></div>
-      <ion-button class="btn-login">REGISTRAR-SE</ion-button>
+      <ion-button class="btn-login" (click)="registrar()">REGISTRAR-SE</ion-button>
     </div>
     
     <!-- Footer signup link -->

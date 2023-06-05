@@ -309,6 +309,7 @@ export class AgendarPage implements OnInit {
 
   async concluirMarcacao(){
     try {
+      console.log(this.formulario)
       const docConfirm  = await this.formulariosService.create(this.formulario);
       if(this.modal && docConfirm){
         console.log("AGENDAR")

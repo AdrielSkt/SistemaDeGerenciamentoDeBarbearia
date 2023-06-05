@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/service/auth.service';
 import { ClienteService } from 'src/app/service/cliente.service';
@@ -10,7 +11,7 @@ import { ClienteService } from 'src/app/service/cliente.service';
 })
 export class MenuPage implements OnInit {
   nomeCliente: string = '';
-  constructor(private navCtrl: NavController, private authService: AuthService, private clienteService: ClienteService) { }
+  constructor(private navCtrl: NavController, private authService: AuthService, private clienteService: ClienteService, private router: Router) { }
 
   ngOnInit() {
     this.buscarDadosCliente()
@@ -39,5 +40,11 @@ export class MenuPage implements OnInit {
 
   irParaAgendamentos() {
     this.navCtrl.navigateRoot('home/home/agendamentos');
+  }
+
+  async deslogar(){
+    await this.authService.logOut();
+    this.router.navigateByUrl('/login');
+
   }
 }

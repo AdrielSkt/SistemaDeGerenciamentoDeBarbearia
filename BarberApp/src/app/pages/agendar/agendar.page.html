@@ -114,17 +114,17 @@
               <ion-list>
                 <ion-card-subtitle>Serviços</ion-card-subtitle>
                 <ion-item *ngFor="let servicos of servicosEscolhidos">
-                  <ion-icon name="cut"></ion-icon>
+                  <ion-icon class="cardIcon" name="cut"></ion-icon>
                   <ion-label>{{servicos.nome}}</ion-label>
                 </ion-item>
                 <ion-card-subtitle>Data/Hora</ion-card-subtitle>
                 <ion-item>
-                  <ion-icon name="time"></ion-icon>
+                  <ion-icon class="cardIcon" name="time"></ion-icon>
                   <ion-label>Dia {{formulario.data}} as {{formulario.hora}} hrs</ion-label>
                 </ion-item>
                 <ion-card-subtitle>Valor</ion-card-subtitle>
                 <ion-item>
-                  <ion-icon name="wallet"></ion-icon>
+                  <ion-icon class="cardIcon" name="wallet"></ion-icon>
                   <ion-label>{{formulario.valor| currency : 'BRL'}}</ion-label>
                 </ion-item>
               </ion-list>
