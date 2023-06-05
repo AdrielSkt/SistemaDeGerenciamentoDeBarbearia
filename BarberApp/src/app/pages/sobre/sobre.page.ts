@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { AuthService } from 'src/app/service/auth.service';
 import { ClienteService } from 'src/app/service/cliente.service';
+import { GmapsService } from 'src/app/service/gmaps-service';
 
 @Component({
   selector: 'app-sobre',
@@ -9,11 +10,25 @@ import { ClienteService } from 'src/app/service/cliente.service';
 })
 export class SobrePage implements OnInit {
   nomeCliente: string = '';
-  constructor(private authService: AuthService, private clienteService: ClienteService) { }
+
+
+  @ViewChild('map', {static: true}) mapElementRef : ElementRef | undefined;
+  googleMaps: any;
+  center = {lat: -16.112725759170544, lng: -47.967683919020665};
+
+  map: any;
+  constructor(private authService: AuthService, private clienteService: ClienteService, private gmaps: GmapsService, private renderer: Renderer2) { }
 
   ngOnInit() {
     this.buscarDadosCliente();
   }
+
+  ngAfterViewInit(){
+    this.carregarMapa();
+  }
+
+
+
   buscarDadosCliente() {
     const idCliente = this.authService.getCurrentUserId();
     if (idCliente) {
@@ -29,4 +44,24 @@ export class SobrePage implements OnInit {
 
     }
   }
+
+  async carregarMapa() {
+    try {
+      let googleMaps: any = await this.gmaps.loadGoogleMaps();
+      this.googleMaps = googleMaps;
+      if (this.mapElementRef) {
+        const mapEl = this.mapElementRef.nativeElement;
+        const location = new googleMaps.LatLng(this.center.lat, this.center.lng);
+        this.map = new googleMaps.Map(mapEl, {
+          center: location,
+          zoom: 12,
+        });
+        this.renderer.addClass(mapEl, 'visible');
+      }
+    } catch (e) {
+      console.log('Erro ao carregar o google maps', e);
+    }
+  }
+
+  
 }

@@ -9,5 +9,7 @@ export const environment = {
     authDomain: 'gerenciamento-de-barbearia.firebaseapp.com',
     messagingSenderId: '499776523266',
     measurementId: 'G-YC0VR7XKVT',
-  }
+  },
+  googleMapsApiKey: 'AIzaSyBxypAh-GVsKrTsPVml0BjYdYKgGbFshS0',
+
 };
