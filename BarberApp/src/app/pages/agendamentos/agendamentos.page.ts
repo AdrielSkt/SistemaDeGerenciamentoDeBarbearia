@@ -48,7 +48,6 @@ export class AgendamentosPage implements OnInit {
   }
 
 buscarFormulariosMarcados(){
-  console.log("BUSCANDO FORM")
   this.formularioService.getAll().subscribe((result) => {
     this.FormHorariosMarcados = [];
     result.forEach((item: any) => {
@@ -66,7 +65,6 @@ buscarFormulariosMarcados(){
       item.servicos.forEach(async (id: string)=>{
         formulario.servicos.push(await this.buscarServico(id));
       })
-      console.log(formulario)
       if(formulario.idCliente == this.idUser){
         this.FormHorariosMarcados.push(formulario);
       }  
@@ -91,7 +89,6 @@ buscarFormulariosMarcados(){
 
 
   async deletarHorario(id: string){
-  console.log(id)
   this.formularioService.deleteDoc(id);
   const alert = await this.alertController.create({
     header: 'REGISTRO EXCLUIDO',

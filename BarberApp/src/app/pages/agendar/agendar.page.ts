@@ -202,9 +202,7 @@ export class AgendarPage implements OnInit {
   }
 
   selecaoDeServico(selecao: ServicoSelect) {
-    console.log(selecao.selecao)
     const index = this.servicosUser.findIndex(servico => selecao.id == servico.id);
-    console.log(index)
     if (selecao.selecao == true) {
       this.servicosUser[index].selecao = false;
       this.valorFinal = +this.valorFinal - +selecao.valor;
@@ -224,7 +222,7 @@ export class AgendarPage implements OnInit {
     this.formulario.valor = this.valorFinal;
     this.selectHorario = true;
     this.selectBarbeiro = false;
-    console.log(this.formulario)
+    this.chatText = 'Escolha o dia e horarios desejados!!';
   }
 
   //SELECAO DE HORARIOS
@@ -250,6 +248,7 @@ export class AgendarPage implements OnInit {
       this.selectHorario = false;
       this.selectedDate = '';
       this.horarioAtual = {id: 0, nome: ''};
+      this.chatText = 'Selecione os serviços desejados!!'
     }
 
   async onDateChange() {
@@ -309,12 +308,11 @@ export class AgendarPage implements OnInit {
 
   async concluirMarcacao(){
     try {
-      console.log(this.formulario)
       const docConfirm  = await this.formulariosService.create(this.formulario);
       if(this.modal && docConfirm){
-        console.log("AGENDAR")
         this.navCtrl.navigateRoot('home/home/agendamentos', { replaceUrl: true });
         this.modal.dismiss(null, 'cancel');
+        this.resetarPaagina();
       }
 
     } catch (error) {
@@ -324,7 +322,23 @@ export class AgendarPage implements OnInit {
     
   }
 
+  resetarPaagina() {
+        // Código para redefinir a página ou executar outras ações necessárias
+    this.barbeiros = [];
+    this.allServicos = [];
+    this.obterServicos();
+    this.obtemBarbeiros();
+    this.selectBarbeiro = false;
+    this.formulario.servicos = [];
+    this.servicosEscolhidos = [];
+    this.valorFinal = 0;
+    this.chatText = 'Escolha teu barbeiro';
+    this.selectedDate = '';
+    this.selectHorario = false;
+    this.listaFormulariosExist = [];
+    this.horarioAtual = {id: 0, nome: ''};
 
+  }
 }
 
 

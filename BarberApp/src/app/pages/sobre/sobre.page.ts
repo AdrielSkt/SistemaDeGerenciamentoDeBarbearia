@@ -57,10 +57,25 @@ export class SobrePage implements OnInit {
           zoom: 12,
         });
         this.renderer.addClass(mapEl, 'visible');
+        this.addMarker(location)
       }
     } catch (e) {
       console.log('Erro ao carregar o google maps', e);
     }
+  }
+
+  addMarker(location: any){
+    let googleMaps : any  = this.googleMaps;
+    const icon = {
+      url: 'assets/location.avif',
+      scaledSize: new googleMaps.Size(50,50),
+    };
+    const marker = new googleMaps.Marker({
+      position: location,
+      map: this.map,
+      icon: icon,
+      animation: googleMaps.Animation.DROP
+    });
   }
 
   
