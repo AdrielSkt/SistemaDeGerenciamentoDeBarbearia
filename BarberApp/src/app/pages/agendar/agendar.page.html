@@ -1,0 +1,140 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary" class="barraSuperior">
+    <ion-avatar slot="end">
+      <img src="../../../assets/logoTo.png" />
+    </ion-avatar>
+    <ion-title mode="md" class="ion-no-padding" color="tertiary">
+      <ion-label>
+        <ion-text>Bem vindo</ion-text>
+        <p><ion-text><strong>{{nomeCliente}}</strong></ion-text></p>
+      </ion-label>
+    </ion-title>
+  </ion-toolbar>
+  <ion-card class="cardInfo">
+    <ion-card-content> {{chatText}} </ion-card-content>
+  </ion-card>
+</ion-header>
+
+
+
+<ion-content [fullscreen]="true">
+  <div *ngIf="!selectBarbeiro && !selectHorario" class="selecaoBarbeiro">
+    <ion-slides #swiper class="banners" (ionSlideDidChange)="barberChange()" [pager]="true"
+      [options]="sliderBarberOptions">
+      <ion-slide *ngFor="let barbeiro of barbeiros">
+        <div align="center">
+          <ion-label>
+            <span><strong>{{barbeiro.nome}}</strong></span>
+            <div class="BarberAvatar">
+              <ion-avatar>
+                <ion-img src="../../../assets/horariosMarcados.jpg"></ion-img>
+              </ion-avatar>
+            </div>
+            <span>{{barbeiro.sobre}}</span>
+          </ion-label>
+        </div>
+      </ion-slide>
+    </ion-slides>
+
+    <ion-slides [pager]="true" [options]="sliderServiceOptions">
+      <ion-slide class="listaServicos" *ngFor="let servico of servicosUser">
+        <ion-card color="primary">
+          <ion-card-subtitle>{{servico.nome}}</ion-card-subtitle>
+          <ion-img src="../../../assets/marcarHorario.jpg"></ion-img>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+
+    <div class="button">
+      <ion-button (click)="escolheBarbeiro()">
+        Escolher Barbeiro
+        <ion-icon name="checkmark-circle-outline"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+
+  <div *ngIf="selectBarbeiro" class="selecaoServicos">
+    <ion-list lines="none" style="gap:4rem">
+      <div style="text-align: center;">
+        <h1><ion-icon (click)="voltarParabarbeiros()" name="arrow-undo-outline"></ion-icon>Serviços prestados por {{barberSelectedName}}!!</h1>
+      </div>
+      <ion-item *ngFor="let servico of servicosUser">
+        <div class="selectServiceList">
+          <p>{{servico.nome}}</p>
+          <ion-fab style="position: relative;">
+            <ion-fab-button size="small" (click)="selecaoDeServico(servico)">
+              <ion-icon name="logo-usd"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-list side="end" style="--background: blue;">
+              <ion-fab-button>
+                <ion-icon name="logo-usd"></ion-icon>
+              </ion-fab-button>
+              <ion-fab-button>
+                {{servico.valor}}
+              </ion-fab-button>
+            </ion-fab-list>
+          </ion-fab>
+        </div>
+      </ion-item>
+    </ion-list>
+
+    <div class="button">
+      <ion-button (click)="confirmarServicos()">
+        {{valorFinal| currency : 'BRL'}}
+      </ion-button>
+    </div>
+  </div>
+
+  <div *ngIf="selectHorario" class="selecaoHorarios">
+    <h1> <ion-icon (click)="voltarParaServicos()" name="arrow-undo-outline"></ion-icon>HORARIOS</h1>
+    <ion-datetime  class="calendario" presentation="date" displayFormat="DD/MM/YYYY" [(ngModel)]="selectedDate"
+      (ionChange)="onDateChange()"></ion-datetime>
+
+    <ion-select aria-label="Horario" placeholder="Selecione o Horario" [compareWith]="compareWith"
+      (ionChange)="changeHorario($event)">
+      <ion-select-option *ngFor="let horario of horariosPossiveis"
+        [value]="horario">{{horario.nome}}</ion-select-option>
+    </ion-select>
+
+
+
+    <div class="button">
+      <ion-button (click)="finalizarPreenchimentoFormulario()" id="open-modal">Ir para confirmação</ion-button>
+    </div>
+
+    <ion-modal trigger="open-modal" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
+      <ng-template>
+        <div class="marcar">
+          <ion-card style="background-color: ghostwhite;">
+            <ion-card-header>
+              <ion-card-title>Card de Marcação de Horario</ion-card-title>
+              <ion-card-subtitle>Barbeiro(a): <strong> {{barberSelectedName}}</strong></ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-list>
+                <ion-card-subtitle>Serviços</ion-card-subtitle>
+                <ion-item *ngFor="let servicos of servicosEscolhidos">
+                  <ion-icon class="cardIcon" name="cut"></ion-icon>
+                  <ion-label>{{servicos.nome}}</ion-label>
+                </ion-item>
+                <ion-card-subtitle>Data/Hora</ion-card-subtitle>
+                <ion-item>
+                  <ion-icon class="cardIcon" name="time"></ion-icon>
+                  <ion-label>Dia {{formulario.data}} as {{formulario.hora}} hrs</ion-label>
+                </ion-item>
+                <ion-card-subtitle>Valor</ion-card-subtitle>
+                <ion-item>
+                  <ion-icon class="cardIcon" name="wallet"></ion-icon>
+                  <ion-label>{{formulario.valor| currency : 'BRL'}}</ion-label>
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+          <div class="button">
+            <ion-button (click)="concluirMarcacao()" id="open-modal">Concluir Marcação</ion-button>
+          </div>
+        </div>
+      </ng-template>
+    </ion-modal>
+  </div>
+</ion-content>

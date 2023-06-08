@@ -1,0 +1,33 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary" class="barraSuperior">
+    <ion-avatar slot="end">
+      <img src="../../../assets/logoTa.png"/>
+  </ion-avatar>
+    <ion-title mode="md" class="ion-no-padding" color="tertiary">
+        <ion-label>
+          <ion-text>Bem vindo</ion-text>
+          <p><ion-text><strong>{{nomeCliente}}</strong></ion-text></p>
+        </ion-label>
+    </ion-title>
+  </ion-toolbar>
+  <ion-card class="cardInfo">
+    <ion-card-content> Vamos ver seus agendamentos </ion-card-content>
+  </ion-card>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item class="item" *ngFor="let horario of FormHorariosMarcados; let index">
+      <div>
+        <ion-label><strong>Horario:</strong>{{ horario.data}} <strong>as</strong> {{horario.hora}}</ion-label>
+        <ion-label><strong>Barbeiro:</strong>{{ horario.nomeBarbeiro }}</ion-label>
+        <ion-label><strong>Valor:</strong> {{ horario.valor | currency : 'BRL'}}</ion-label>
+        <ion-fab-button (click)="deletarHorario(horario.id ?horario.id : '')"><ion-icon name="trash"></ion-icon></ion-fab-button>
+        <div>
+          <ion-label *ngFor="let servico of horario.servicos"><ion-icon name="pricetags"></ion-icon>{{servico}}</ion-label>
+        </div>
+      </div>
+
+    </ion-item>
+  </ion-list>
+</ion-content>

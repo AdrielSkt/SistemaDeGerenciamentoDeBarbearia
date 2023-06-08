@@ -1,0 +1,20 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary" class="barraSuperior">
+    <ion-avatar slot="end">
+      <img src="../../../assets/logoTa.png"/>
+  </ion-avatar>
+    <ion-title mode="md" class="ion-no-padding" color="tertiary">
+        <ion-label>
+          <ion-text>Bem vindo</ion-text>
+          <p><ion-text><strong>{{nomeCliente}}</strong></ion-text></p>
+        </ion-label>
+    </ion-title>
+  </ion-toolbar>
+  <ion-card class="cardInfo">
+    <ion-card-content> Localização da nossa instituição de ensino !! </ion-card-content>
+  </ion-card>
+</ion-header>
+
+<ion-content>
+  <div class="map" #map></div>
+</ion-content>

@@ -1,0 +1,31 @@
+<ion-content class="ion-padding">
+  <div class="flex">
+    <div class="img-flex">
+      <img src="./../../../assets/logoTo.png"/>
+    </div>
+    <div>
+
+      <ion-item fill="outline">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input [(ngModel)]="email"></ion-input>
+      </ion-item>
+      <div class="margin"></div>
+      <ion-item fill="outline">
+        <ion-label position="floating">Nome</ion-label>
+        <ion-input [(ngModel)]="nome"></ion-input>
+      </ion-item>
+      <div class="margin"></div>
+      <ion-item fill="outline">
+        <ion-label position="floating">Senha</ion-label>
+        <ion-input type="password" [(ngModel)]="senha"></ion-input>
+      </ion-item>
+      <div class="margin"></div>
+      <ion-button class="btn-login" (click)="registrar()">REGISTRAR-SE</ion-button>
+    </div>
+    
+    <!-- Footer signup link -->
+    <div class="footer">
+      Já tem conta? <span routerLink="/login">LOGIN</span>
+    </div>
+  </div>
+</ion-content>

@@ -19,7 +19,6 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { DialogErrorSenha, LoginComponent } from './components/login/login.component';
-
 import { GerenciamentoModule } from './gerenciamento/gerenciamento.module';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore'

@@ -1,0 +1,49 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary" class="barraSuperior">
+    <ion-avatar slot="end">
+      <img src="../../../assets/logoTa.png" />
+    </ion-avatar>
+    <ion-title mode="md" class="ion-no-padding" color="tertiary">
+      <ion-label>
+        <ion-text>Bem vindo</ion-text>
+        <p><ion-text><strong>{{nomeCliente}}</strong></ion-text></p>
+      </ion-label>
+    </ion-title>
+  </ion-toolbar>
+  <ion-card class="cardInfo">
+    <ion-card-content> Vamos marcar um cortezin </ion-card-content>
+  </ion-card>
+</ion-header>
+
+<ion-content  [fullscreen]="true">
+  <div class="content">
+    
+    <ion-card (click)="irParaAgendar()">
+      <ion-card-content>
+        <ion-avatar slot="end">
+          <img src="../../../assets/marcarHorario.jpg" />
+        </ion-avatar>
+      </ion-card-content>
+      <ion-card-header>
+        <ion-card-title>Agendar</ion-card-title>
+        <ion-card-subtitle>Marque novo horario</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+  
+    <ion-card (click)="irParaAgendamentos()">
+      <ion-card-content>
+        <ion-avatar slot="end">
+          <img src="../../../assets/horariosMarcados.jpg" />
+        </ion-avatar>
+      </ion-card-content>
+      <ion-card-header>
+        <ion-card-title>Agendamentos</ion-card-title>
+        <ion-card-subtitle>Veja horarios marcados</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+    <div class="item">
+      <ion-fab-button (click)="deslogar()"><ion-icon name="log-out"></ion-icon></ion-fab-button>
+    </div>
+    
+  </div>
+</ion-content>

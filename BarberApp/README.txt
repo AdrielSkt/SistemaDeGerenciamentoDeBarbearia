@@ -1,2 +1,0 @@
-#Iniciar aplicação
-expo start
