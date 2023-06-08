@@ -39,7 +39,7 @@ ngOnInit() {
     },
     {
       nome:'Gerenciamento de serviços',
-      rota: 'menu',
+      rota: 'servicos',
       icone: 'content_cut'
     }
 
@@ -54,7 +54,9 @@ public acessarRota(rota: String): void{
   if(rota != undefined){
     if(rota == 'usuario'){
       this.route.navigate([rota, this.userId]);
-    }else{
+    }else if(rota == 'gerenciar-marcacoes'){
+      this.route.navigate([rota, this.userId]);
+    } else{
       this.route.navigate([rota]);
     }
     

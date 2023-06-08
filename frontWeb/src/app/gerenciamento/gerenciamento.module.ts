@@ -19,6 +19,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { UsuarioEditComponent } from './usuario-edit/usuario-edit.component';
+import { GerenciamentoDeServicosComponent } from './gerenciamento-de-servicos/gerenciamento-de-servicos.component';
+import { EditarAdicionarServicoComponent } from './gerenciamento-de-servicos/editar-adicionar-servico/editar-adicionar-servico.component';
 
 
 
@@ -29,7 +31,9 @@ import { UsuarioEditComponent } from './usuario-edit/usuario-edit.component';
     BodyComponent,
     MenuComponent,
     GerenciamentoDeHorariosComponent,
-    UsuarioEditComponent
+    UsuarioEditComponent,
+    GerenciamentoDeServicosComponent,
+    EditarAdicionarServicoComponent
 
   ],
   imports: [

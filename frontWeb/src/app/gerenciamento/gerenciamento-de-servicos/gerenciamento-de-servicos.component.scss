@@ -1,0 +1,52 @@
+.title-div{
+  font-size: 30px;
+  text-align: center;
+  color: aliceblue;
+  margin-right: 9%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.name, .name[_ngcontent-dpw-c147]{
+  color: aliceblue;
+  width: 10%;
+}
+.table{
+  background-color: black;
+}
+  .mat-mdc-row .mat-mdc-cell {
+      border-bottom: 1px solid transparent;
+      border-top: 1px solid transparent;
+      cursor: pointer;
+  }
+  .mat-mdc-row:hover .mat-mdc-cell {
+      border-color: currentColor;
+  }
+
+td,th{
+  text-align: center;
+  color: aliceblue;
+  font-size: large;
+}
+
+.name{
+  width: 50%;
+
+}
+.actions{
+  width: 10%;
+
+}
+
+.danger{
+  background-color: red;
+}
+
+button{
+  margin-left: 10%;
+}
+
+.addButton{
+  margin-left: 0%;
+  margin-right: 8%;
+}

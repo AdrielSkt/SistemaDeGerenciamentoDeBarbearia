@@ -106,6 +106,12 @@ export class GerenciamentoDeHorariosComponent implements OnInit{
     })
   }
 
+  excluirMarcacao(id : string){
+    console.log(id)
+     this.gerenciamentoHorariosService.delete(id);
+     this.filtraListaPorData();
+  }
+
 }
 
 

@@ -42,7 +42,7 @@ ngOnInit() {
       imagem: "assets/servicos.jpeg",
       titulo: "Gerenciamento de Serviços",
       descricao: "Gerencie os serviços prestados pelos barbeiros",
-      rota: 'menu'
+      rota: 'servicos'
 
     }
   ];
@@ -51,7 +51,7 @@ ngOnInit() {
 public acessarRota(rota: String): void{
   console.log(rota);
   if(rota != undefined){
-    if(rota == 'menu'){
+    if(rota == 'menu' || rota == 'servicos'){
       this.route.navigate([rota]);
     }else{
       this.route.navigate([rota, this.userId]);

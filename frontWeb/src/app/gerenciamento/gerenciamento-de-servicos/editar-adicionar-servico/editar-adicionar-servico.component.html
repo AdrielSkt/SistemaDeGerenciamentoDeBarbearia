@@ -1,0 +1,36 @@
+<form class="conteiner" [formGroup]="formulario">
+
+  <div class="header">
+    <button mat-mini-fab color="primary"(click)="voltar()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="titulo">{{titulo}}</h1>
+    
+  </div>
+  <div class="content">
+  <div class="formulario">
+    <mat-form-field appearance="fill">
+      <mat-label>Nome</mat-label>
+      <input matInput placeholder="Escreva seu nome" formControlName="nome">
+      <mat-icon matSuffix>view_timeline</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Valor</mat-label>
+      <input matInput placeholder="Escreva o valor do serviço" formControlName="valor">
+      <mat-icon matSuffix>attach_money</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <button *ngIf="!idDeEdicao" class="addButton" mat-raised-button color="primary" (click)="salvar()">
+    <mat-icon>save</mat-icon> Salvar
+  </button>
+
+  <button *ngIf="idDeEdicao" class="addButton" mat-raised-button color="primary" (click)="atualizar()">
+    <mat-icon>save</mat-icon> Atualizar
+  </button>
+</div>
+  <div class="buttons">
+
+  </div>
+</form>
