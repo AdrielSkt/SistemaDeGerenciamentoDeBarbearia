@@ -117,11 +117,20 @@ ion-content {
     }
 
 //SELECAO DE SERVICOS
-    .selectServiceList{
-      display: flex;
-      align-items: center;
-      
+.servicos{
+  display: flex;
+  margin: 0;
+  justify-content: center;
+  div{
+    p{
+      margin: 0;
     }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+}
 // SELECAO DE HORARIOS
 .selecaoHorarios{
   display: flex;

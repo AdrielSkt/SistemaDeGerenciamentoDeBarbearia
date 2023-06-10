@@ -58,8 +58,8 @@
       <div style="text-align: center;">
         <h1><ion-icon (click)="voltarParabarbeiros()" name="arrow-undo-outline"></ion-icon>Serviços prestados por {{barberSelectedName}}!!</h1>
       </div>
-      <ion-item *ngFor="let servico of servicosUser">
-        <div class="selectServiceList">
+      <ion-item class="servicos" *ngFor="let servico of servicosUser">
+        <div>
           <p>{{servico.nome}}</p>
           <ion-fab style="position: relative;">
             <ion-fab-button size="small" (click)="selecaoDeServico(servico)">
