@@ -21,6 +21,7 @@ export class SignupPage implements OnInit {
 
   async registrar() {
     //Deve se criar validação em registros e login para que não se logue em conta de barbeiro no app e com conta de cliente em Web
+    try{
     const id = await this.authService.registrar(this.email, this.senha);
     if (id != null) {
       const obj = {
@@ -36,9 +37,20 @@ export class SignupPage implements OnInit {
         buttons: ['OK'],
       });
       await alert.present();
-      this.router.ngOnDestroy();
+      this.email = '';
+      this.nome = '';
+      this.senha = '';
       this.router.navigateByUrl('/login');
       
+    }
+  }catch{
+      const alert = await this.alertController.create({
+        header: 'ERRO',
+        subHeader: 'Falha ao cadastrar usuario!',
+        message: 'dados invalidos para realizar login, lembre-se de usar um provedor de email valido, e ter uma senha com minimo de 6 digitos!',
+        buttons: ['Entendi'],
+      });
+      await alert.present();
     }
   }
 
