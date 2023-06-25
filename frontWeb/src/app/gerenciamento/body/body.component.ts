@@ -28,12 +28,12 @@ ngOnInit() {
       icone: 'home'
     },
     {
-      nome:'Gerenciamento de horarios',
+      nome:'Gerenciamento de Horarios',
       rota: 'gerenciar-marcacoes',
       icone: 'watch_later'
     },
     {
-      nome: 'Gerenciamento de usuarios',
+      nome: 'Gerenciamento do Perfil',
       rota: 'usuario',
       icone: 'people_alt'
     },

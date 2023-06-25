@@ -33,8 +33,8 @@ ngOnInit() {
     },
     {
       imagem: "assets/usuario.png",
-      titulo: "Gerenciamento de Usuarios",
-      descricao: "Gerencie os barbeiros cadastrados no sistema",
+      titulo: "Gerenciamento do Perfil ",
+      descricao: "Editar os dados do Barbeiro",
       rota: 'usuario'
 
     },
